@@ -1,12 +1,13 @@
 <?php
-//require_once './controle/UsuarioControle.php';
+require_once './controle/UsuarioControle.php';
 require_once './modelo/Usuario.php';
-//$controle = new UsuarioControle();
+$controle = new UsuarioControle();
 $usuario = new Usuario();
 
 $nome_usuario = "";
 $login_usuario = "";
 $senha_usuario = "";
+$senha_dois_usuario = "";
 
 $cod_usuario = filter_input(INPUT_POST, "cod_usuario");
 
@@ -34,25 +35,25 @@ if ($cod_usuario) {
                             <div class="form-group">
                                 <label for="nome_usuario" class="col-lg-2 control-label">Nome:</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="nome_usuario" placeholder="Nome do usuário">
+                                    <input type="text" class="form-control" id="nome_usuario" value="<?= $nome_usuario ?>" placeholder="Nome do usuário">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="login_usuario" class="col-lg-2 control-label">Login:</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="login_usuario" placeholder="Login para acesso do usuário">
+                                    <input type="text" class="form-control" id="login_usuario" value="<?= $login_usuario ?>" placeholder="Login para acesso do usuário">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="senha_usuario" class="col-lg-2 control-label">Senha:</label>
                                 <div class="col-lg-10">
-                                    <input type="password" class="form-control" id="senha_usuario" placeholder="Senha para acesso do usuário">
+                                    <input type="password" class="form-control" id="senha_usuario" value="<?= $senha_usuario ?>" placeholder="Senha para acesso do usuário">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="senha_dois_usuario" class="col-lg-2 control-label">Repetir senha:</label>
                                 <div class="col-lg-10">
-                                    <input type="password" class="form-control" id="senha_dois_usuario" placeholder="Repita a mesma senha">
+                                    <input type="password" class="form-control" id="senha_dois_usuario" value="<?= $senha_dois_usuario ?>" placeholder="Repita a mesma senha">
                                 </div>
                             </div>
                             <div class="form-group">

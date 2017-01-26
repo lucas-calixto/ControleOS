@@ -1,7 +1,7 @@
 <?php
 
-require_once '../banco/Banco.php';
-require_once '../modelo/Usuario.php';
+require_once './banco/Banco.php';
+require_once './modelo/Usuario.php';
 
 class UsuarioDAO {
 
