@@ -3,6 +3,9 @@
     margin: 0 auto;
     padding-top: 50px;
 }
-.esp-tabela {
-    height: 10px;
+.red {
+    color: #ea2f10;
+}
+.orange {
+    color: #e99002;
 }

@@ -60,85 +60,35 @@
         </nav>
 
         <!-- Inicio da parte dinâmica-->
-        <section class="container">
-            <article class="col-lg-9">
-                <div class="well">
-                    <form class="form-horizontal">
-                        <fieldset>
-                            <legend>Cadastro de Usuários</legend>
-                            <div class="form-group">
-                                <label for="nome_usuario" class="col-lg-2 control-label">Nome:</label>
-                                <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="nome_usuario" placeholder="Nome do usuário">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="login_usuario" class="col-lg-2 control-label">Login:</label>
-                                <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="login_usuario" placeholder="Login para acesso do usuário">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="senha_usuario" class="col-lg-2 control-label">Senha:</label>
-                                <div class="col-lg-10">
-                                    <input type="password" class="form-control" id="senha_usuario" placeholder="Senha para acesso do usuário">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="senha_dois_usuario" class="col-lg-2 control-label">Repetir senha:</label>
-                                <div class="col-lg-10">
-                                    <input type="password" class="form-control" id="senha_dois_usuario" placeholder="Repita a mesma senha">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-10 col-lg-offset-2">
-                                    <button type="submit" class="btn btn-primary">Gravar</button>
-                                    <button type="reset" class="btn btn-default">Limpar</button>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
+        <?php
+        $pg = filter_input(INPUT_GET, "pg");
 
-                <table class="table table-striped table-hover ">
-                    <thead>
-                        <tr>
-                            <th>Codigo</th>
-                            <th>Nome</th>
-                            <th>Usuário</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span class="esp-tabela">1</span></td>
-                            <td><span class="esp-tabela">João da Silva</span></td>
-                            <td><span class="esp-tabela">joao</span></td>
-                            <td><a href="#" class="btn btn-warning btn-xs">Editar</a>
-                                <a href="#" class="btn btn-danger btn-xs">Excluir</a></td>
-                        </tr>
-                    </tbody>
-                </table> 
-            </article>
-
-            <article class="col-lg-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Ajuda</div>
-                    <div class="panel-body">
-                        <p>Esta e uma tela de ajuda e recomendações do sistema.</p>
-                    </div>
-                </div>
-            </article>
-        </section>
+        switch ($pg) {
+            case "usuario":
+                require_once './visao/usuario.php';
+                break;
+            case "atendente":
+                require_once './visao/atendente.php';
+                break;
+            case "tecnico":
+                require './visao/tecnico.php';
+                break;
+            case "tipo":
+                require_once './visao/tipo.php';
+                break;
+            default:
+                require_once './visao/usuario.php';
+        }
+        ?>
+        <!-- Inicio da parte dinâmica-->
 
         <div class="container">
             <footer class="col-lg-12">
                 <ul class="breadcrumb">
-                    <li  class="active">Direitos Reservados a Tec Port Informatica - Porteirinha MG</li>
+                    <li  class="active">&copy; Direitos Reservados a Tec Port Informatica, Porteirinha MG - <b>v 1.0-Beta</b></li>
                 </ul>
             </footer>
         </div>
-        <!-- Inicio da parte dinâmica-->
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
