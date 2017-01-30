@@ -1,4 +1,6 @@
 <?php
+$uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+$host = $_SERVER['HTTP_HOST'];
 require_once './controle/UsuarioControle.php';
 require_once './modelo/Usuario.php';
 $controle = new UsuarioControle();
@@ -31,12 +33,20 @@ if (!$acao) {
     $usuario->setLogin_usuario(filter_input(INPUT_POST, "login_usuario"));
     $usuario->setSenha_usuario(filter_input(INPUT_POST, "senha_usuario"));
     if ($controle->editar($usuario)) {
-        $resultado = "Usuário cadastrado com sucesso!";
+        $resultado = "Usuário editado com sucesso!";
+        $extra = 'controle.php?pg=usuario';
+        header("Location: http://$host$uri/$extra");
     } else {
         $resultado = "Erro ao cadastrar usuário!";
     }
 } else {
-    $controle->excluir($cod_usuario);
+    if ($controle->excluir($cod_usuario)) {
+        $resultado = "Usuário editado com sucesso!";
+        $extra = 'controle.php?pg=usuario';
+        header("Location: http://$host$uri/$extra");
+    } else {
+        $resultado = "Erro ao cadastrar usuário!";
+    }
 }
 ?>
 <!-- SCRIPT DE VALIDAÇÃO DOS CAMPOS DE SENHA -->
@@ -47,6 +57,8 @@ if (!$acao) {
 
         if (senha !== senhaDois) {
             alert("As senhas não conferem!");
+        } else if (senha === '') {
+            alert("Digite uma senha!");
         } else {
             document.getElementById("form").submit();
         }
@@ -71,25 +83,25 @@ if (!$acao) {
                 <div class="form-group">
                     <label for="nome_usuario" class="col-lg-2 control-label">Nome:</label>
                     <div class="col-lg-10">
-                        <input type="text" name="nome_usuario" class="form-control" id="nome_usuario" value="<?= $nome_usuario ?>" placeholder="Nome do usuário">
+                        <input type="text" name="nome_usuario" class="form-control" id="nome_usuario" value="<?= $nome_usuario ?>" placeholder="Nome do usuário" required="" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="login_usuario" class="col-lg-2 control-label">Login:</label>
                     <div class="col-lg-10">
-                        <input type="text" name="login_usuario" class="form-control" id="login_usuario" value="<?= $login_usuario ?>" placeholder="Login para acesso do usuário">
+                        <input type="text" name="login_usuario" class="form-control" id="login_usuario" value="<?= $login_usuario ?>" placeholder="Login para acesso do usuário" required="" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="senha_usuario" class="col-lg-2 control-label">Senha:</label>
                     <div class="col-lg-10">
-                        <input type="password" name="senha_usuario" class="form-control" id="senha_usuario" value="<?= $senha_usuario ?>" placeholder="Senha para acesso do usuário">
+                        <input type="password" name="senha_usuario" class="form-control" id="senha_usuario" value="<?= $senha_usuario ?>" placeholder="Senha para acesso do usuário" required="" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="senha_dois_usuario" class="col-lg-2 control-label">Repetir senha:</label>
                     <div class="col-lg-10">
-                        <input type="password" name="senha_dois_usuario" class="form-control" id="senha_dois_usuario" value="" placeholder="Repita a mesma senha">
+                        <input type="password" name="senha_dois_usuario" class="form-control" id="senha_dois_usuario" value="" placeholder="Repita a mesma senha" required="" />
                     </div>
                 </div>
                 <div class="form-group">

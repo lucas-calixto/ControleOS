@@ -42,13 +42,13 @@
                                     <li><a href="?pg=tecnico">Cadastro de Tecnicos</a></li>
                                     <li><a href="?pg=tipo">Cadastro de Tipos</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#">Cadastro de Clientes</a></li>
+                                    <li><a href="?pg=cliente">Cadastro de Clientes</a></li>
                                 </ul>
                             </li>
-                            <li><a href="">Controle</a></li>
-                            <li><a href="#">Atendimentos</a></li>
-                            <li><a href="#">Relatorios</a></li>
-                            <li><a href="#">Logs</a></li>
+                            <li><a href="?pg=controle">Controle</a></li>
+                            <li><a href="?pg=atendimento">Atendimentos</a></li>
+                            <li><a href="?pg=relatorio">Relatorios</a></li>
+                            <li><a href="?pg=log">Logs</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#" title="Sair"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
