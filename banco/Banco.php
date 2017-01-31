@@ -55,7 +55,7 @@ class Banco {
      * @return void
      */
     public function Disconnect() {
-        $this->connection = null;
+        self::$connection = null;
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
-$host = $_SERVER['HTTP_HOST'];
-$uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+$host = filter_input(INPUT_SERVER, 'HTTP_HOST');
+$uri = rtrim(dirname(filter_input(INPUT_SERVER,'PHP_SELF')), '/\\');
 require_once './controle/AtendenteControle.php';
 require_once './modelo/Atendente.php';
 
@@ -34,13 +34,10 @@ if (!$acao) {
         $resultado = "Erro ao cadastrar atendente!";
     }
 } else {
-    if ($controle->excluir($cod_atendente)) {
-        $resultado = "Atendente editado com sucesso!";
-        $extra = 'controle.php?pg=atendente';
-        header("Location: http://$host$uri/$extra");
-    } else {
-        $resultado = "Erro ao excluir atendente!";
-    }
+    $controle->excluir($cod_atendente);
+    $resultado = "Atendente editado com sucesso!";
+    $extra = 'controle.php?pg=atendente';
+    header("Location: http://$host$uri/$extra");
 }
 ?>
 <section class="container">
@@ -48,7 +45,7 @@ if (!$acao) {
         <div class="well">
             <form class="form-horizontal" method="POST" action="?pg=atendente<?php
             if ($acao) {
-                echo '&acao=pr&metodo=gravar&cod_atendente=';
+                echo '&acao=ir&metodo=gravar&cod_atendente=';
                 echo filter_input(INPUT_GET, "cod_atendente");
             }
             ?>" id="form">

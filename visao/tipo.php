@@ -1,4 +1,16 @@
-        <section class="container">
+<?php
+$host = filter_input(INPUT_SERVER, 'HTTP_HOST');
+$uri = rtrim(dirname(filter_input(INPUT_SERVER, 'PHP_SELF')), '/\\');
+
+require_once './controle/TipoControle.php';
+require_once './modelo/Tipo.php';
+
+$controle = new TipoControle();
+$tipo = new Tipo();
+
+?>
+
+<section class="container">
             <article class="col-lg-9">
                 <div class="well">
                     <form class="form-horizontal">
@@ -29,24 +41,14 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach ($controle->lista() as $tipo) { ?>
                         <tr>
-                            <td><span class="esp-tabela">1</span></td>
-                            <td><span class="esp-tabela">João da Silva</span></td>
+                            <td><span class="esp-tabela"><?= $tipo->getCod_tipo() ?></span></td>
+                            <td><span class="esp-tabela"><?= $tipo->getDesc_tipo() ?></span></td>
                             <td><a href="#" title="Editar"><span class="glyphicon glyphicon-edit orange" aria-hidden="true"></span></a>
                                 <a href="#" title="Exclir"><span class="glyphicon glyphicon-remove red" aria-hidden="true"></span></a></td>
                         </tr>
-                        <tr>
-                            <td><span class="esp-tabela">2</span></td>
-                            <td><span class="esp-tabela">Paulo Silveira</span></td>
-                            <td><a href="#" title="Editar"><span class="glyphicon glyphicon-edit orange" aria-hidden="true"></span></a>
-                                <a href="#" title="Exclir"><span class="glyphicon glyphicon-remove red" aria-hidden="true"></span></a></td>
-                        </tr>
-                        <tr>
-                            <td><span class="esp-tabela">3</span></td>
-                            <td><span class="esp-tabela">Maria Joana</span></td>
-                            <td><a href="#" title="Editar"><span class="glyphicon glyphicon-edit orange" aria-hidden="true"></span></a>
-                                <a href="#" title="Exclir"><span class="glyphicon glyphicon-remove red" aria-hidden="true"></span></a></td>
-                        </tr>
+                        <?php } ?>
                     </tbody>
                 </table> 
             </article>

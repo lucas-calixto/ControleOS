@@ -1,6 +1,6 @@
 <?php
-$uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-$host = $_SERVER['HTTP_HOST'];
+$host = filter_input(INPUT_SERVER, 'HTTP_HOST');
+$uri = rtrim(dirname(filter_input(INPUT_SERVER, 'PHP_SELF')), '/\\');
 require_once './controle/UsuarioControle.php';
 require_once './modelo/Usuario.php';
 $controle = new UsuarioControle();
@@ -40,13 +40,10 @@ if (!$acao) {
         $resultado = "Erro ao cadastrar usuário!";
     }
 } else {
-    if ($controle->excluir($cod_usuario)) {
-        $resultado = "Usuário editado com sucesso!";
-        $extra = 'controle.php?pg=usuario';
-        header("Location: http://$host$uri/$extra");
-    } else {
-        $resultado = "Erro ao cadastrar usuário!";
-    }
+    $controle->excluir($cod_usuario);
+    $resultado = "Usuário editado com sucesso!";
+    $extra = 'controle.php?pg=usuario';
+    header("Location: http://$host$uri/$extra");
 }
 ?>
 <!-- SCRIPT DE VALIDAÇÃO DOS CAMPOS DE SENHA -->
@@ -70,50 +67,52 @@ if (!$acao) {
         <div class="well">
             <form class="form-horizontal" method="POST" action="?pg=usuario<?php
             if ($acao) {
-                echo '&acao=pr&metodo=gravar&cod_usuario=';
+                echo '&acao=ir&metodo=gravar&cod_usuario=';
                 echo filter_input(INPUT_GET, "cod_usuario");
             }
             ?>" id="form">
-                  <?php if ($acao) { ?>
-                    <legend>Editar Usuário</legend>
-                <?php } else { ?>
-                    <legend>Cadastro de Usuários</legend>
-                <?php } ?>
+                <fieldset>
+                    <?php if ($acao) { ?>
+                        <legend>Editar Usuário</legend>
+                    <?php } else { ?>
+                        <legend>Cadastro de Usuários</legend>
+                    <?php } ?>
 
-                <div class="form-group">
-                    <label for="nome_usuario" class="col-lg-2 control-label">Nome:</label>
-                    <div class="col-lg-10">
-                        <input type="text" name="nome_usuario" class="form-control" id="nome_usuario" value="<?= $nome_usuario ?>" placeholder="Nome do usuário" required="" />
+                    <div class="form-group">
+                        <label for="nome_usuario" class="col-lg-2 control-label">Nome:</label>
+                        <div class="col-lg-10">
+                            <input type="text" name="nome_usuario" class="form-control" id="nome_usuario" value="<?= $nome_usuario ?>" placeholder="Nome do usuário" required="" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="login_usuario" class="col-lg-2 control-label">Login:</label>
-                    <div class="col-lg-10">
-                        <input type="text" name="login_usuario" class="form-control" id="login_usuario" value="<?= $login_usuario ?>" placeholder="Login para acesso do usuário" required="" />
+                    <div class="form-group">
+                        <label for="login_usuario" class="col-lg-2 control-label">Login:</label>
+                        <div class="col-lg-10">
+                            <input type="text" name="login_usuario" class="form-control" id="login_usuario" value="<?= $login_usuario ?>" placeholder="Login para acesso do usuário" required="" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="senha_usuario" class="col-lg-2 control-label">Senha:</label>
-                    <div class="col-lg-10">
-                        <input type="password" name="senha_usuario" class="form-control" id="senha_usuario" value="<?= $senha_usuario ?>" placeholder="Senha para acesso do usuário" required="" />
+                    <div class="form-group">
+                        <label for="senha_usuario" class="col-lg-2 control-label">Senha:</label>
+                        <div class="col-lg-10">
+                            <input type="password" name="senha_usuario" class="form-control" id="senha_usuario" value="<?= $senha_usuario ?>" placeholder="Senha para acesso do usuário" required="" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="senha_dois_usuario" class="col-lg-2 control-label">Repetir senha:</label>
-                    <div class="col-lg-10">
-                        <input type="password" name="senha_dois_usuario" class="form-control" id="senha_dois_usuario" value="" placeholder="Repita a mesma senha" required="" />
+                    <div class="form-group">
+                        <label for="senha_dois_usuario" class="col-lg-2 control-label">Repetir senha:</label>
+                        <div class="col-lg-10">
+                            <input type="password" name="senha_dois_usuario" class="form-control" id="senha_dois_usuario" value="" placeholder="Repita a mesma senha" required="" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
-                        <?php if (!strcmp($acao, "gravar")) { ?>
-                            <input type="hidden" value="gravar" />
-                        <?php } ?>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <?php if (!strcmp($acao, "gravar")) { ?>
+                                <input type="hidden" value="gravar" />
+                            <?php } ?>
 
-                        <button type="button" class="btn btn-success" onclick="validaSenha()">Gravar</button>
-                        <button type="reset" class="btn btn-default">Limpar</button>
+                            <button type="button" class="btn btn-success" onclick="validaSenha()">Gravar</button>
+                            <button type="reset" class="btn btn-default">Limpar</button>
+                        </div>
                     </div>
-                </div>
+                </fieldset>
             </form>
         </div>
 
