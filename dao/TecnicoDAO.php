@@ -68,7 +68,7 @@ class TecnicoDAO {
 
     public function busca($cod) {
         try {
-            $sql = "SELECT cod_tecnico, nome_nome FROM tecnicos WHERE cod_tecnico = :cod";
+            $sql = "SELECT cod_tecnico, nome_tecnico FROM tecnicos WHERE cod_tecnico = :cod";
 
             $parametros = array(
                 ":cod" => $cod

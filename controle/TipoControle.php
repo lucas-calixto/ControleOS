@@ -18,8 +18,8 @@ class TipoControle {
         }
     }
     
-    public function lista() {
-        return $this->dao->lista();
+    public function lista($pag_inicio, $pag_fim) {
+        return $this->dao->lista($pag_inicio, $pag_fim);
     }
     
     public function editar(Tipo $tipo) {

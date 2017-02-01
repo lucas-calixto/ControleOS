@@ -21,7 +21,6 @@ class TipoDAO {
 
             $parametros = array(
                 ":nome" => $tipo->getDesc_tipo()
-
             );
 
             return $this->banco->ExecuteNonQuery($sql, $parametros);
@@ -30,13 +29,19 @@ class TipoDAO {
         }
     }
 
-    public function lista() {
+    public function lista($pag_inicio, $pag_fim) {
         try {
-            $sql = "SELECT cod_tipo, desc_tipo FROM tipos";
+            $sql = "SELECT cod_tipo, desc_tipo FROM tipos LIMIT :pag_inicio, :pag_fim";
 
             $tipos = [];
-            $retorno = $this->banco->ExecuteQuery($sql);
 
+            $parametros = array(
+                ":pag_inicio" => $pag_inicio,
+                ":pag_fim" => $pag_fim
+            );
+
+            $retorno = $this->banco->ExecuteQuery($sql, $parametros);
+            
             foreach ($retorno as $ln) {
                 $tipo = new Tipo();
                 $tipo->setCod_tipo($ln['cod_tipo']);
@@ -52,11 +57,10 @@ class TipoDAO {
     }
 
     public function editar(Tipo $tipo) {
-
         try {
-            $sql = "UPDATE tipos SET desc_tipo = :nome WHERE cod_tipo = :cod";
+            $sql = "UPDATE tipos SET desc_tipo = :desc WHERE cod_tipo = :cod";
             $parametros = array(
-                ":nome" => $tipo->getDesc_tipo(),
+                ":desc" => $tipo->getDesc_tipo(),
                 ":cod" => $tipo->getCod_tipo()
             );
 
@@ -80,12 +84,12 @@ class TipoDAO {
             $tipo->setCod_tipo($retorno['cod_tipo']);
             $tipo->setDesc_tipo($retorno['desc_tipo']);
 
-            return $$tipo;
+            return $tipo;
         } catch (PDOException $ex) {
             echo $ex->getMessage();
         }
     }
-    
+
     public function excluir($cod) {
         try {
             $sql = "DELETE FROM tipos WHERE cod_tipo = :cod";
@@ -97,10 +101,9 @@ class TipoDAO {
             $retorno = $this->banco->ExecuteQuery($sql, $parametros);
 
             return $retorno;
-            
         } catch (PDOException $ex) {
             echo $ex->getMessage();
         }
     }
-    
+
 }
