@@ -7,7 +7,7 @@
         <title>Controle de O.S.</title>
 
         <!-- Bootstrap -->
-        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="https://bootswatch.com/flatly/bootstrap.css" rel="stylesheet">
         <link href="css/estilo.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -18,7 +18,7 @@
         <![endif]-->
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="col-lg-12">
                     <div class="navbar-header">
@@ -28,7 +28,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">Controle de O.S.</a>
+                        <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> O.S.</a>
                     </div>
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -41,11 +41,9 @@
                                     <li><a href="?pg=atendente">Cadastro de Atendentes</a></li>
                                     <li><a href="?pg=tecnico">Cadastro de Tecnicos</a></li>
                                     <li><a href="?pg=tipo">Cadastro de Tipos</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="?pg=cliente">Cadastro de Clientes</a></li>
                                 </ul>
                             </li>
-                            <li><a href="?pg=controle">Controle</a></li>
+                            <li><a href="?pg=controleos">Controle</a></li>
                             <li><a href="?pg=atendimento">Atendimentos</a></li>
                             <li><a href="?pg=relatorio">Relatorios</a></li>
                             <li><a href="?pg=log">Logs</a></li>
@@ -74,6 +72,9 @@
                 break;
             case "tipo":
                 require_once './visao/tipo.php';
+                break;
+            case "controleos":
+                require_once './visao/controleos.php';
                 break;
             default:
                 require_once './visao/usuario.php';

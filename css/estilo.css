@@ -1,3 +1,6 @@
+body {
+    padding-top: 80px;
+}
 .formulario {
     max-width: 300px;
     margin: 0 auto;
