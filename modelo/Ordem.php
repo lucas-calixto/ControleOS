@@ -12,6 +12,7 @@ class Ordem {
     private $data_cad_ordem;
     private $data_inicio_ordem;
     private $data_fim_ordem;
+    private $hora_cad_ordem;
     private $hora_inicio_ordem;
     private $hora_fim_ordem;
     private $cod_tipo_ordem;
@@ -48,6 +49,14 @@ class Ordem {
 
     function getData_fim_ordem() {
         return $this->data_fim_ordem;
+    }
+    
+    function getHora_cad_ordem() {
+        return $this->hora_cad_ordem;
+    }
+
+    function setHora_cad_ordem($hora_cad_ordem) {
+        $this->hora_cad_ordem = $hora_cad_ordem;
     }
 
     function getHora_inicio_ordem() {

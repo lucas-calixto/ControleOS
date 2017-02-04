@@ -18,8 +18,8 @@ class AtendenteControle {
         }
     }
     
-    public function lista() {
-        return $this->dao->lista();
+    public function lista($inicio, $fim) {
+        return $this->dao->lista($inicio, $fim);
     }
     
     public function editar(Atendente $atendente) {

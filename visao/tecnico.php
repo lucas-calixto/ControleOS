@@ -85,16 +85,41 @@ if (!$acao) {
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($controle->lista() as $tecnico) { ?>
+                <?php
+                $qtd = count($controle->lista(0, 1000));
+                $qtd_reg = 5;
+                $qtd_pag = ceil($qtd / $qtd_reg);
+                $pag_atual = filter_input(INPUT_GET, 'pag');
+
+                if (empty($pag_atual)) {
+                    $inicio = 0;
+                    $fim = $qtd_reg;
+                } else {
+                    $pag = filter_input(INPUT_GET, 'pag');
+
+                    $inicio = ($qtd_reg * $pag) - $qtd_reg;
+                    $fim = $qtd_reg;
+                }
+
+                foreach ($controle->lista($inicio, $fim) as $tecnico) {
+                    ?>
                     <tr>
                         <td><span class="esp-tabela"><?= $tecnico->getCod_tecnico() ?></span></td>
                         <td><span class="esp-tabela"><?= $tecnico->getNome_tecnico() ?></span></td>
                         <td><a href="?pg=tecnico&acao=editar&cod_tecnico=<?= $tecnico->getCod_tecnico() ?>" title="Editar"><span class="glyphicon glyphicon-edit orange" aria-hidden="true"></span></a>
-                            <a href="?pg=tecnico&acao=excluir&cod_tecnico=<?= $tecnico->getCod_tecnico() ?>" title="Exclir"><span class="glyphicon glyphicon-remove red" aria-hidden="true"></span></a></td>
+                            <a href="?pg=tecnico&acao=excluir&cod_tecnico=<?= $tecnico->getCod_tecnico() ?>" title="Exclir" onclick="return confirm('Deseja excluir este registro?')"><span class="glyphicon glyphicon-remove red" aria-hidden="true"></span></a></td>
                     </tr>
                 <?php } ?>
             </tbody>
         </table> 
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                <?php for ($ln = 0; $ln < $qtd_pag; $ln++) { ?>
+                    <a href="?pg=tecnico&pag=<?= $ln + 1 ?>" class="btn btn-xs btn-primary"><?= $ln + 1 ?></a>
+                <?php } ?>
+            </div>
+        </div>
+        <br />
     </article>
 
     <article class="col-lg-3">

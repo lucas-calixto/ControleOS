@@ -1,7 +1,7 @@
 <?php
 
 require_once './banco/Banco.php';
-require_once './modelo/Atendente.php';
+require_once './modelo/Ordem.php';
 
 class AtendenteDAO {
 
@@ -15,13 +15,29 @@ class AtendenteDAO {
         $this->banco->Disconnect();
     }
 
-    public function cadastra(Atendente $atendente) {
+    public function cadastra(Ordem $ordem) {
         try {
-            $sql = "INSERT INTO atendentes (nome_atentente) VALUES (:nome)";
+            $sql = "INSERT INTO ordens VALUES (:desc_ordem, data_cad_ordem, data_inicio_ordem,"
+                    . "data_fim_ordem, hora_cad_ordem, hora_inicio_ordem, hora_fim_ordem,"
+                    . "cod_tipo_ordem, cod_cliente_ordem, cod_tecnico_ordem, cod_atendente_ordem,"
+                    . "desc_total_ordem, desc_resolve_ordem, status_ordem, solicita_ordem)";
 
             $parametros = array(
-                ":nome" => $atendente->getNome_atendente()
-
+                ":desc_ordem" => $ordem->getDesc_ordem(),
+                ":data_cad_ordem" => $ordem->getData_cad_ordem(),
+                ":data_inicio_ordem" => $ordem->getData_inicio_ordem(),
+                ":data_fim_ordem" => $ordem->getData_fim_ordem(),
+                ":hora_cad_ordem" => $ordem->getHora_cad_ordem(),
+                ":hora_inicio_ordem" => $ordem->getHora_inicio_ordem(),
+                ":hora_fim_ordem" => $ordem->getHora_fim_ordem(),
+                ":cod_tipo_ordem" => $ordem->getCod_tipo_ordem(),
+                ":cod_cliente_ordem" => $ordem->getCod_cliente_ordem(),
+                ":cod_tecnico_ordem" => $ordem->getCod_tecnico_ordem(),
+                ":cod_atendente_ordem" => $ordem->getCod_atendente_ordem(),
+                ":desc_total_ordem" => $ordem->getDesc_total_ordem(),
+                ":desc_resolve_ordem" => $ordem->getDesc_resolve_ordem(),
+                ":status_ordem" => $ordem->getStatus_ordem(),
+                ":solicita_ordem" => $ordem->getSolicitatante_ordem()
             );
 
             return $this->banco->ExecuteNonQuery($sql, $parametros);
@@ -30,18 +46,12 @@ class AtendenteDAO {
         }
     }
 
-    public function lista($inicio, $fim) {
+    public function lista() {
         try {
-            $sql = "SELECT cod_atendente, nome_atentente FROM atendentes LIMIT :inicio, :fim";
+            $sql = "SELECT * FROM atendentes";
 
             $atendentes = [];
-            
-            $parametros = array (
-                ":inicio" => $inicio,
-                ":fim" => $fim
-            );
-            
-            $retorno = $this->banco->ExecuteQuery($sql, $parametros);
+            $retorno = $this->banco->ExecuteQuery($sql);
 
             foreach ($retorno as $ln) {
                 $atendente = new Atendente();

@@ -30,12 +30,17 @@ class TecnicoDAO {
         }
     }
 
-    public function lista() {
+    public function lista($inicio, $fim) {
         try {
-            $sql = "SELECT cod_tecnico, nome_tecnico FROM tecnicos";
+            $sql = "SELECT cod_tecnico, nome_tecnico FROM tecnicos LIMIT :inicio, :fim";
 
+            $parametros = array (
+                ":inicio" => $inicio,
+                ":fim" => $fim
+            );
+            
             $tecnicos = [];
-            $retorno = $this->banco->ExecuteQuery($sql);
+            $retorno = $this->banco->ExecuteQuery($sql, $parametros);
 
             foreach ($retorno as $ln) {
                 $tecnico = new Tecnico();

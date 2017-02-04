@@ -107,7 +107,7 @@ if (!$acao) {
                         <td><span class="esp-tabela"><?= $tipo->getCod_tipo() ?></span></td>
                         <td><span class="esp-tabela"><?= $tipo->getDesc_tipo() ?></span></td>
                         <td><a href="?pg=tipo&acao=editar&cod_tipo=<?= $tipo->getCod_tipo() ?>" title="Editar"><span class="glyphicon glyphicon-edit orange" aria-hidden="true"></span></a>
-                            <a href="?pg=tipo&acao=excluir&cod_tipo=<?= $tipo->getCod_tipo() ?>" title="Exclir"><span class="glyphicon glyphicon-remove red" aria-hidden="true"></span></a></td>
+                            <a href="?pg=tipo&acao=excluir&cod_tipo=<?= $tipo->getCod_tipo() ?>" title="Exclir" onclick="return confirm('Deseja excluir este registro?')"><span class="glyphicon glyphicon-remove red" aria-hidden="true"></span></a></td>
                     </tr>
                 <?php } ?>
             </tbody>

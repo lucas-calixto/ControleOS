@@ -1,6 +1,6 @@
 <?php
 $host = filter_input(INPUT_SERVER, 'HTTP_HOST');
-$uri = rtrim(dirname(filter_input(INPUT_SERVER,'PHP_SELF')), '/\\');
+$uri = rtrim(dirname(filter_input(INPUT_SERVER, 'PHP_SELF')), '/\\');
 require_once './controle/AtendenteControle.php';
 require_once './modelo/Atendente.php';
 
@@ -83,16 +83,40 @@ if (!$acao) {
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($controle->lista() as $atendente) { ?>
+                <?php
+                $qtd = count($controle->lista(0, 1000));
+                $qtd_reg = 5;
+                $qtd_pag = ceil($qtd / $qtd_reg);
+                $pag_atual = filter_input(INPUT_GET, 'pag');
+
+                if (empty($pag_atual)) {
+                    $inicio = 0;
+                    $fim = $qtd_reg;
+                } else {
+                    $pag = filter_input(INPUT_GET, 'pag');
+
+                    $inicio = ($qtd_reg * $pag) - $qtd_reg;
+                    $fim = $qtd_reg;
+                }
+                foreach ($controle->lista($inicio, $fim) as $atendente) {
+                    ?>
                     <tr>
                         <td><span class="esp-tabela"><?= $atendente->getCod_atendente() ?></span></td>
                         <td><span class="esp-tabela"><?= $atendente->getNome_atendente() ?></span></td>
                         <td><a href="?pg=atendente&acao=editar&cod_atendente=<?= $atendente->getCod_atendente() ?>" title="Editar"><span class="glyphicon glyphicon-edit orange" aria-hidden="true"></span></a>
-                            <a href="?pg=atendente&acao=excluir&cod_atendente=<?= $atendente->getCod_atendente() ?>" title="Exclir"><span class="glyphicon glyphicon-remove red" aria-hidden="true"></span></a></td>
+                            <a href="?pg=atendente&acao=excluir&cod_atendente=<?= $atendente->getCod_atendente() ?>" title="Exclir" onclick="return confirm('Deseja excluir este registro?')"><span class="glyphicon glyphicon-remove red" aria-hidden="true"></span></a></td>
                     </tr>
                 <?php } ?>
             </tbody>
-        </table> 
+        </table>
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                <?php for ($ln = 0; $ln < $qtd_pag; $ln++) { ?>
+                    <a href="?pg=atendente&pag=<?= $ln + 1 ?>" class="btn btn-xs btn-primary"><?= $ln + 1 ?></a>
+                <?php } ?>
+            </div>
+        </div>
+        <br />
     </article>
 
     <article class="col-lg-3">

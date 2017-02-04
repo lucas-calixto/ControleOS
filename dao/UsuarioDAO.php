@@ -31,12 +31,18 @@ class UsuarioDAO {
         }
     }
 
-    public function lista() {
+    public function lista($inicio, $fim) {
         try {
-            $sql = "SELECT cod_usuario, nome_usuario, login_usuario FROM usuarios";
+            $sql = "SELECT cod_usuario, nome_usuario, login_usuario FROM usuarios LIMIT :inicio, :fim";
 
             $usuarios = [];
-            $retorno = $this->banco->ExecuteQuery($sql);
+            
+            $parametros = array (
+                ":inicio" => $inicio,
+                ":fim" => $fim
+            );
+            
+            $retorno = $this->banco->ExecuteQuery($sql, $parametros);
 
             foreach ($retorno as $ln) {
                 $usuario = new Usuario();

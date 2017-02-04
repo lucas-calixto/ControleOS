@@ -68,6 +68,6 @@ if (!$acao) {
                     </tr>
                 <?php } ?>
             </tbody>
-        </table> 
+        </table>
     </article>
 </section>
