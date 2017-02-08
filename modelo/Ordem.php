@@ -23,7 +23,7 @@ class Ordem {
     private $desc_resolve_ordem;
     private $status_ordem;
     private $solicitatante_ordem;
-    
+
     function __construct() {
         $this->cod_tipo_ordem = new Tipo();
         $this->cod_cliente_ordem = new Cliente();
@@ -31,7 +31,7 @@ class Ordem {
         $this->cod_atendente_ordem = new Atendente();
     }
 
-        function getCod_ordem() {
+    function getCod_ordem() {
         return $this->cod_ordem;
     }
 
@@ -50,7 +50,7 @@ class Ordem {
     function getData_fim_ordem() {
         return $this->data_fim_ordem;
     }
-    
+
     function getHora_cad_ordem() {
         return $this->hora_cad_ordem;
     }
@@ -158,4 +158,5 @@ class Ordem {
     function setSolicitatante_ordem($solicitatante_ordem) {
         $this->solicitatante_ordem = $solicitatante_ordem;
     }
+
 }

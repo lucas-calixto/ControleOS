@@ -115,8 +115,9 @@ if (!$acao) {
         <div class="btn-toolbar">
             <div class="btn-group">
                 <?php for ($ln = 0; $ln < $qtd_pag; $ln++) { ?>
-                    <a href="?pg=tipo&pag=<?= $ln + 1 ?>" class="btn btn-xs btn-primary"><?= $ln + 1 ?></a>
+                    <a href="?pg=tipo&pag=<?= $ln + 1 ?>" class="btn btn-sm btn-primary"><?= $ln + 1 ?></a>
                 <?php } ?>
+                    <a href="?pg=tipo&pag=<?= $qtd_pag ?>" class="btn btn-sm btn-primary">>></a>
             </div>
         </div>
         <br />

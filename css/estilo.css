@@ -2,7 +2,6 @@ body {
     padding-top: 80px;
 }
 .formulario {
-    max-width: 300px;
     margin: 0 auto;
     padding-top: 50px;
 }
@@ -11,4 +10,10 @@ body {
 }
 .orange {
     color: #e99002;
+}
+.blue {
+    color: #007196;
+}
+.green {
+    color: #2b6e44;
 }

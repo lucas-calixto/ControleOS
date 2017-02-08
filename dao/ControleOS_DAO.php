@@ -2,8 +2,9 @@
 
 require_once './banco/Banco.php';
 require_once './modelo/Ordem.php';
+require_once './modelo/Cliente.php';
 
-class AtendenteDAO {
+class ControleOS_DAO {
 
     private $banco;
 
@@ -46,22 +47,36 @@ class AtendenteDAO {
         }
     }
 
-    public function lista() {
+    public function lista($inicio, $fim) {
         try {
-            $sql = "SELECT * FROM atendentes";
+            $sql = "SELECT * FROM ordens"
+                    . " INNER JOIN clientes ON ordens.cod_cliente_ordem = clientes.cod_cliente"
+                    . " ORDER BY data_cad_ordem DESC"
+                    . " LIMIT :inicio, :fim";
 
-            $atendentes = [];
-            $retorno = $this->banco->ExecuteQuery($sql);
+            $parametros = array(
+                ":inicio" => $inicio,
+                ":fim" => $fim
+            );
+
+            $ordens = [];
+            $retorno = $this->banco->ExecuteQuery($sql, $parametros);
 
             foreach ($retorno as $ln) {
-                $atendente = new Atendente();
-                $atendente->setCod_atendente($ln['cod_atendente']);
-                $atendente->setNome_atendente($ln['nome_atentente']);
+                $ordem = new Ordem();
+                $cliente = new Cliente();
+                
+                $ordem->setCod_ordem($ln['cod_ondem']);
+                $cliente->setNome_cliente($ln['nome_cliente']);
+                $ordem->setCod_cliente_ordem($cliente);
+                $ordem->setDesc_ordem($ln['desc_ordem']);
+                $ordem->setData_cad_ordem($ln['data_cad_ordem']);
+                $ordem->setStatus_ordem($ln['status_ordem']);
 
-                $atendentes[] = $atendente;
+                $ordens[] = $ordem;
             }
 
-            return $atendentes;
+            return $ordens;
         } catch (PDOException $ex) {
             echo $ex->getMessage();
         }
@@ -101,7 +116,7 @@ class AtendenteDAO {
             echo $ex->getMessage();
         }
     }
-    
+
     public function excluir($cod) {
         try {
             $sql = "DELETE FROM atendentes WHERE cod_atendente = :cod";
@@ -113,10 +128,9 @@ class AtendenteDAO {
             $retorno = $this->banco->ExecuteQuery($sql, $parametros);
 
             return $retorno;
-            
         } catch (PDOException $ex) {
             echo $ex->getMessage();
         }
     }
-    
+
 }

@@ -19,7 +19,7 @@ class Cliente {
     private $plano_cliente;
     
     function __construct() {
-        $this->cod_cidade_cliente = new Cliente();
+        $this->cod_cidade_cliente = new Cidade();
     }
     
     function getCod_cliente() {

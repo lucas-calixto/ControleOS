@@ -9,6 +9,9 @@
         <!-- Bootstrap -->
         <link href="https://bootswatch.com/flatly/bootstrap.css" rel="stylesheet">
         <link href="css/estilo.css" rel="stylesheet">
+        <link href="css/jquery-editable-select.min.css" rel="stylesheet">
+
+        <link rel="icon" type="image/png" sizes="32x32" href="imagens/favicon-32x32.png">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -94,5 +97,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery-editable-select.min.js"></script>
+        <script>
+            window.onload = function () {
+                $('#select').editableSelect({effects: 'default'});
+            };
+        </script>
     </body>
 </html>
