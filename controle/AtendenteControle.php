@@ -1,6 +1,6 @@
 <?php
 
-require_once './dao/AtendenteDAO.php';
+require_once BASE_DIR . 'dao' . DS . 'AtendenteDAO.php';
 
 class AtendenteControle {
 

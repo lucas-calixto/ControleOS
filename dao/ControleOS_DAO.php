@@ -1,8 +1,8 @@
 <?php
 
-require_once './banco/Banco.php';
-require_once './modelo/Ordem.php';
-require_once './modelo/Cliente.php';
+require_once BASE_DIR . 'banco' . DS . 'Banco.php';
+require_once BASE_DIR . 'modelo' . DS . 'Ordem.php';
+require_once BASE_DIR . 'modelo' . DS . 'Cliente.php';
 
 class ControleOS_DAO {
 
@@ -18,25 +18,19 @@ class ControleOS_DAO {
 
     public function cadastra(Ordem $ordem) {
         try {
-            $sql = "INSERT INTO ordens VALUES (:desc_ordem, data_cad_ordem, data_inicio_ordem,"
-                    . "data_fim_ordem, hora_cad_ordem, hora_inicio_ordem, hora_fim_ordem,"
-                    . "cod_tipo_ordem, cod_cliente_ordem, cod_tecnico_ordem, cod_atendente_ordem,"
-                    . "desc_total_ordem, desc_resolve_ordem, status_ordem, solicita_ordem)";
+            $sql = "INSERT INTO"
+                    . " ordens"
+                    . " (cod_atendente_ordem, cod_cliente_ordem, cod_tipo_ordem, desc_ordem, cod_tecnico_ordem, desc_total_ordem, status_ordem, solicita_ordem, data_cad_ordem)"
+                    . " VALUES"
+                    . " (:cod_atendente, :cod_cliente, :cod_tipo, :desc_ordem, :cod_tecnico, :desc_total, :status_ordem, :solicita_ordem, NOW())";
 
             $parametros = array(
+                ":cod_atendente" => $ordem->getCod_atendente_ordem(),
+                ":cod_cliente" => $ordem->getCod_cliente_ordem(),
+                ":cod_tipo" => $ordem->getCod_tipo_ordem(),
                 ":desc_ordem" => $ordem->getDesc_ordem(),
-                ":data_cad_ordem" => $ordem->getData_cad_ordem(),
-                ":data_inicio_ordem" => $ordem->getData_inicio_ordem(),
-                ":data_fim_ordem" => $ordem->getData_fim_ordem(),
-                ":hora_cad_ordem" => $ordem->getHora_cad_ordem(),
-                ":hora_inicio_ordem" => $ordem->getHora_inicio_ordem(),
-                ":hora_fim_ordem" => $ordem->getHora_fim_ordem(),
-                ":cod_tipo_ordem" => $ordem->getCod_tipo_ordem(),
-                ":cod_cliente_ordem" => $ordem->getCod_cliente_ordem(),
-                ":cod_tecnico_ordem" => $ordem->getCod_tecnico_ordem(),
-                ":cod_atendente_ordem" => $ordem->getCod_atendente_ordem(),
-                ":desc_total_ordem" => $ordem->getDesc_total_ordem(),
-                ":desc_resolve_ordem" => $ordem->getDesc_resolve_ordem(),
+                ":cod_tecnico" => $ordem->getCod_tecnico_ordem(),
+                ":desc_total" => $ordem->getDesc_total_ordem(),
                 ":status_ordem" => $ordem->getStatus_ordem(),
                 ":solicita_ordem" => $ordem->getSolicitatante_ordem()
             );
@@ -65,7 +59,7 @@ class ControleOS_DAO {
             foreach ($retorno as $ln) {
                 $ordem = new Ordem();
                 $cliente = new Cliente();
-                
+
                 $ordem->setCod_ordem($ln['cod_ondem']);
                 $cliente->setNome_cliente($ln['nome_cliente']);
                 $ordem->setCod_cliente_ordem($cliente);
@@ -99,7 +93,9 @@ class ControleOS_DAO {
 
     public function busca($cod) {
         try {
-            $sql = "SELECT cod_atendente, nome_atentente FROM atendentes WHERE cod_atendente = :cod";
+            $sql = "SELECT * FROM ordens"
+                    . " WHERE ordens.csod_ordem = :cod"
+;
 
             $parametros = array(
                 ":cod" => $cod
@@ -107,11 +103,20 @@ class ControleOS_DAO {
 
             $retorno = $this->banco->ExecuteQueryOneRow($sql, $parametros);
 
-            $atendente = new Atendente();
-            $atendente->setCod_atendente($retorno['cod_atendente']);
-            $atendente->setNome_atendente($retorno['nome_atentente']);
+            $ordem = new Ordem();
+            //$cliente = new Cliente();
 
-            return $atendente;
+            $ordem->setCod_ordem($retorno['cod_ondem']);
+            //$cliente->setCod_cliente($retorno['cod_cliente']);
+            //$cliente->setNome_cliente($retorno['nome_cliente']);
+            //$ordem->setCod_cliente_ordem($cliente);
+            $ordem->setDesc_ordem($retorno['desc_ordem']);
+            $ordem->setData_cad_ordem($retorno['data_cad_ordem']);
+            $ordem->setStatus_ordem($retorno['status_ordem']);
+
+            echo $ordem->getCod_ordem();
+            
+            return $ordem;
         } catch (PDOException $ex) {
             echo $ex->getMessage();
         }

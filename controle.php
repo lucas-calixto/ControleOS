@@ -61,6 +61,9 @@
 
         <!-- Inicio da parte dinâmica-->
         <?php
+        define('DS', DIRECTORY_SEPARATOR);
+        define( 'BASE_DIR', dirname( __FILE__ ) . DS );
+
         $pg = filter_input(INPUT_GET, "pg");
 
         switch ($pg) {
@@ -78,6 +81,12 @@
                 break;
             case "controleos":
                 require_once './visao/controleos.php';
+                break;
+            case "novaos":
+                require_once './visao/novaos.php';
+                break;
+            case "imprimiros":
+                require_once './visao/imprimiros.php';
                 break;
             default:
                 require_once './visao/controleos.php';
@@ -100,7 +109,7 @@
         <script src="js/jquery-editable-select.min.js"></script>
         <script>
             window.onload = function () {
-                $('#select').editableSelect({effects: 'default'});
+                $('#select').editableSelect({filter: true, effects: 'default'});
             };
         </script>
     </body>

@@ -4,13 +4,14 @@ $uri = rtrim(dirname(filter_input(INPUT_SERVER, 'PHP_SELF')), '/\\');
 
 require_once './controle/OrdemControle.php';
 require_once './modelo/Ordem.php';
+require_once './dao/ClienteDAO.php';
 require_once './modelo/Cliente.php';
 
 $controle = new OrdemControle();
 $ordem = new Ordem();
+$dao = new ClienteDAO();
 
 $acao = filter_input(INPUT_GET, "acao");
-$cod_ordem = filter_input(INPUT_GET, "cod_atendente");
 
 if (!$acao) {
     
@@ -104,13 +105,10 @@ if (!$acao) {
                     <h4 class="modal-title">Selecionar Cliente</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="?pg=novaos" method="POST">
-                        <select class="form-control" id="select">
-                            <?php
-                            foreach ($controle->lista(0, 1000) as $ordem) {
-                            $cliente = $ordem->getCod_cliente_ordem();
-                            ?>
-                            <option><?= $cliente->getNome_cliente() ?></option>
+                    <form action="controle.php?pg=novaos" method="POST">
+                        <select class="form-control" name="cod_cliente" id="" required="">
+                            <?php foreach ($dao->lista() as $cliente) { ?>
+                            <option value="<?= $cliente->getCod_cliente() ?>"><?= $cliente->getNome_cliente() ?></option>
                             <?php } ?>
                         </select>
                         <br />

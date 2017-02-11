@@ -1,7 +1,7 @@
 <?php
 
-require_once './banco/Banco.php';
-require_once './modelo/Tipo.php';
+require_once BASE_DIR . 'banco' . DS . 'Banco.php';
+require_once BASE_DIR . 'modelo' . DS . 'Tipo.php';
 
 class TipoDAO {
 

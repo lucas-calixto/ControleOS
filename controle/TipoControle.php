@@ -1,6 +1,6 @@
 <?php
 
-require_once './dao/TipoDAO.php';
+require_once BASE_DIR . 'dao' . DS . 'TipoDAO.php';
 
 class TipoControle {
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once './dao/ControleOS_DAO.php';
+require_once BASE_DIR . 'dao' . DS . 'ControleOS_DAO.php';
 
 class OrdemControle {
 
@@ -10,8 +10,8 @@ class OrdemControle {
         $this->dao = new ControleOS_DAO();
     }
 
-    public function cadastra() {
-
+    public function cadastra(Ordem $ordem) {
+        return $this->dao->cadastra($ordem);
     }
     
     public function lista($inicio, $fim) {

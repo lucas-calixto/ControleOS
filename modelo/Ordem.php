@@ -1,9 +1,9 @@
 <?php
 
-include_once 'modelo/Tipo.php';
-include_once 'modelo/Cliente.php';
-include_once 'modelo/Tecnico.php';
-include_once 'modelo/Atendente.php';
+include_once BASE_DIR . 'modelo' . DS . 'Tipo.php';
+include_once BASE_DIR . 'modelo' . DS . 'Cliente.php';
+include_once BASE_DIR . 'modelo' . DS . 'Tecnico.php';
+include_once BASE_DIR . 'modelo' . DS . 'Atendente.php';
 
 class Ordem {
 

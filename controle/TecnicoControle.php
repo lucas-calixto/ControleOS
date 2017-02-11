@@ -1,6 +1,6 @@
 <?php
 
-require_once './dao/TecnicoDAO.php';
+require_once BASE_DIR . 'dao' . DS . 'TecnicoDAO.php';
 
 class TecnicoControle {
 
