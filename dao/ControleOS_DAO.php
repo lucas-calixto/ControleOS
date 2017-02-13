@@ -1,8 +1,11 @@
 <?php
 
 require_once BASE_DIR . 'banco' . DS . 'Banco.php';
+require_once BASE_DIR . 'modelo' . DS . 'Tipo.php';
 require_once BASE_DIR . 'modelo' . DS . 'Ordem.php';
+require_once BASE_DIR . 'modelo' . DS . 'Tecnico.php';
 require_once BASE_DIR . 'modelo' . DS . 'Cliente.php';
+require_once BASE_DIR . 'modelo' . DS . 'Atendente.php';
 
 class ControleOS_DAO {
 
@@ -45,6 +48,7 @@ class ControleOS_DAO {
         try {
             $sql = "SELECT * FROM ordens"
                     . " INNER JOIN clientes ON ordens.cod_cliente_ordem = clientes.cod_cliente"
+                    . " WHERE ordens.status_ordem LIKE 'ABERTA' OR ordens.status_ordem LIKE 'ANDAMENTO'"
                     . " ORDER BY data_cad_ordem DESC"
                     . " LIMIT :inicio, :fim";
 
@@ -66,6 +70,8 @@ class ControleOS_DAO {
                 $ordem->setDesc_ordem($ln['desc_ordem']);
                 $ordem->setData_cad_ordem($ln['data_cad_ordem']);
                 $ordem->setStatus_ordem($ln['status_ordem']);
+                $ordem->setDesc_total_ordem($ln['desc_total_ordem']);
+                $ordem->setCod_tecnico_ordem($ln['cod_tecnico_ordem']);
 
                 $ordens[] = $ordem;
             }
@@ -76,13 +82,17 @@ class ControleOS_DAO {
         }
     }
 
-    public function editar(Atendente $atendente) {
-
+    public function editar(Ordem $ordem) {
         try {
-            $sql = "UPDATE atendentes SET nome_atentente = :nome WHERE cod_atendente = :cod";
+            $sql = "UPDATE ordens SET"
+                    . " desc_total_ordem = :desc, cod_tecnico_ordem = :cod_tecnico, status_ordem = :status"
+                    . " WHERE cod_ondem = :cod";
+
             $parametros = array(
-                ":nome" => $atendente->getNome_atendente(),
-                ":cod" => $atendente->getCod_atendente()
+                ":desc" => $ordem->getDesc_total_ordem(),
+                ":status" => $ordem->getStatus_ordem(),
+                ":cod" => $ordem->getCod_ordem(),
+                "cod_tecnico" => $ordem->getCod_tecnico_ordem()
             );
 
             return $this->banco->ExecuteNonQuery($sql, $parametros);
@@ -94,8 +104,11 @@ class ControleOS_DAO {
     public function busca($cod) {
         try {
             $sql = "SELECT * FROM ordens"
-                    . " WHERE ordens.csod_ordem = :cod"
-;
+                    . " INNER JOIN clientes ON ordens.cod_cliente_ordem = clientes.cod_cliente"
+                    . " INNER JOIN atendentes ON ordens.cod_atendente_ordem = atendentes.cod_atendente"
+                    . " INNER JOIN tecnicos ON ordens.cod_tecnico_ordem = tecnicos.cod_tecnico"
+                    . " INNER JOIN tipos ON ordens.cod_tipo_ordem = tipos.cod_tipo"
+                    . " WHERE cod_ondem = :cod";
 
             $parametros = array(
                 ":cod" => $cod
@@ -103,19 +116,35 @@ class ControleOS_DAO {
 
             $retorno = $this->banco->ExecuteQueryOneRow($sql, $parametros);
 
+            $tipo = new Tipo();
             $ordem = new Ordem();
-            //$cliente = new Cliente();
+            $tecnico = new Tecnico();
+            $cliente = new Cliente();
+            $atendente = new Atendente();
 
             $ordem->setCod_ordem($retorno['cod_ondem']);
-            //$cliente->setCod_cliente($retorno['cod_cliente']);
-            //$cliente->setNome_cliente($retorno['nome_cliente']);
-            //$ordem->setCod_cliente_ordem($cliente);
+
+            $cliente->setCod_cliente($retorno['cod_cliente']);
+            $cliente->setNome_cliente($retorno['nome_cliente']);
+            $cliente->setTelefone_um_cliente($retorno['telefone_um_cliente']);
+            $cliente->setEndereco_cliente($retorno['endereco_cliente']);
+            $ordem->setCod_cliente_ordem($cliente);
+
+            $atendente->setNome_atendente($retorno['nome_atentente']);
+            $ordem->setCod_atendente_ordem($atendente);
+
+            $tecnico->setNome_tecnico($retorno['nome_tecnico']);
+            $ordem->setCod_tecnico_ordem($tecnico);
+
+            $tipo->setDesc_tipo($retorno['desc_tipo']);
+            $ordem->setCod_tipo_ordem($tipo);
+
             $ordem->setDesc_ordem($retorno['desc_ordem']);
             $ordem->setData_cad_ordem($retorno['data_cad_ordem']);
             $ordem->setStatus_ordem($retorno['status_ordem']);
+            $ordem->setSolicitatante_ordem($retorno['solicita_ordem']);
+            $ordem->setDesc_total_ordem($retorno['desc_total_ordem']);
 
-            echo $ordem->getCod_ordem();
-            
             return $ordem;
         } catch (PDOException $ex) {
             echo $ex->getMessage();
@@ -124,15 +153,30 @@ class ControleOS_DAO {
 
     public function excluir($cod) {
         try {
-            $sql = "DELETE FROM atendentes WHERE cod_atendente = :cod";
+            $sql = "UPDATE ordens SET status_ordem = 'EXCLUIDA' WHERE cod_ondem = :cod";
 
             $parametros = array(
                 ":cod" => $cod
             );
 
-            $retorno = $this->banco->ExecuteQuery($sql, $parametros);
+            return $this->banco->ExecuteNonQuery($sql, $parametros);
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+        }
+    }
+    
+    public function baixar(Ordem $ordem) {
+        try {
+            $sql = "UPDATE ordens"
+                    . " SET status_ordem = 'BAIXADA', desc_resolve_ordem = :desc_resolve"
+                    . " WHERE cod_ondem = :cod";
 
-            return $retorno;
+            $parametros = array(
+                ":cod" => $ordem->getCod_ordem(),
+                ":desc_resolve" => $ordem->getDesc_resolve_ordem()
+            );
+
+            return $this->banco->ExecuteNonQuery($sql, $parametros);
         } catch (PDOException $ex) {
             echo $ex->getMessage();
         }

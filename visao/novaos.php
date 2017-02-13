@@ -54,7 +54,7 @@ if (!strcmp(filter_input(INPUT_GET, "metodo"), "gravar")) {
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="cod_tipo">Tipo de Serviço</label>
                     <div class="col-md-9">
-                        <select id="tipo_ordem" name="cod_tipo" class="form-control">
+                        <select id="tipo_ordem" name="cod_tipo" class="form-control" required="">
                             <?php foreach ($daoTipo->lista(0, 100) as $tipo) { ?>
                                 <option value="<?= $tipo->getCod_tipo() ?>"><?= $tipo->getDesc_tipo() ?></option>
                             <?php } ?>
@@ -76,7 +76,7 @@ if (!strcmp(filter_input(INPUT_GET, "metodo"), "gravar")) {
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="cod_tecnico">Selecione o Técnico</label>
                     <div class="col-md-9">
-                        <select id="cod_tecnico" name="cod_tecnico" class="form-control" multiple="multiple">
+                        <select id="cod_tecnico" name="cod_tecnico" class="form-control" multiple="multiple" required="">
                             <?php foreach ($daoTecnico->lista(0, 100) as $tecnico) { ?>
                                 <option value="<?= $tecnico->getCod_tecnico() ?>"><?= $tecnico->getNome_tecnico() ?></option>
                             <?php } ?>

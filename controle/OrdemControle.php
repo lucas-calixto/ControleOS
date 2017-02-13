@@ -18,8 +18,8 @@ class OrdemControle {
         return $this->dao->lista($inicio, $fim);
     }
     
-    public function editar() {
-        
+    public function editar(Ordem $ordem) {
+        return $this->dao->editar($ordem);
     }
 
     public function busca($cod) { 
@@ -28,5 +28,9 @@ class OrdemControle {
     
     public function excluir($cod) { 
         return $this->dao->excluir($cod);
+    } 
+    
+    public function baixar($cod) { 
+        return $this->dao->baixar($cod);
     } 
 }

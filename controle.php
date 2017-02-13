@@ -62,7 +62,7 @@
         <!-- Inicio da parte dinâmica-->
         <?php
         define('DS', DIRECTORY_SEPARATOR);
-        define( 'BASE_DIR', dirname( __FILE__ ) . DS );
+        define('BASE_DIR', dirname(__FILE__) . DS);
 
         $pg = filter_input(INPUT_GET, "pg");
 
@@ -111,6 +111,24 @@
             window.onload = function () {
                 $('#select').editableSelect({filter: true, effects: 'default'});
             };
+
+            function preencheEditar(valor, txtOrdem, codTecnico) {
+                document.getElementById('cod_ordem').value = valor;
+                document.getElementById('txt_desc_ordem').value = txtOrdem;
+
+                var combo = document.getElementById("cod_tecnico");
+
+                for (var i = 0; i < combo.options.length; i++) {
+                    if (combo.options[i].value == codTecnico) {
+                        combo.options[i].selected = "true";
+                        break;
+                    }
+                }
+            }
+
+            function preencheBaixar(valor) {
+                document.getElementById('cod_ordem_baixar').value = valor;
+            }
         </script>
     </body>
 </html>
