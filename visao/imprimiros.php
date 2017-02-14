@@ -2,8 +2,8 @@
 $host = filter_input(INPUT_SERVER, 'HTTP_HOST');
 $uri = rtrim(dirname(filter_input(INPUT_SERVER, 'PHP_SELF')), '/\\');
 
-define( 'DS', DIRECTORY_SEPARATOR );
-define( 'BASE_DIR', dirname( dirname( __FILE__ ) ) . DS );
+define('DS', DIRECTORY_SEPARATOR);
+define('BASE_DIR', dirname(dirname(__FILE__)) . DS);
 
 require_once BASE_DIR . 'controle' . DS . 'OrdemControle.php';
 require_once BASE_DIR . 'modelo' . DS . 'Ordem.php';
@@ -33,7 +33,7 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title></title>
-        <link rel="icon" type="image/png" sizes="32x32" href="imagens/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../imagens/favicon-32x32.png">
     </head>
     <body onload="self.print();">
         <style type="text/css">
@@ -77,8 +77,11 @@ and open the template in the editor.
                 <td class="tg-yw4l" colspan="4"><?= $cliente->getEndereco_cliente() ?></td>
             </tr>
             <tr>
-                <td class="tg-9hbo">ATENDENTE:</td>
-                <td class="tg-yw4l"><?= $ordem->getCod_atendente_ordem()->getNome_atendente() ?></td>
+                <td class="tg-9hbo">INFORMAÇÕES:</td>
+                <td class="tg-yw4l">
+                    <?= "IP: " . $cliente->getIp_cliente() . " - " ?>
+                    <?= "PLANO: " . $cliente->getPlano_cliente() ?>
+                </td>
                 <td class="tg-yw4l"></td>
                 <td class="tg-l2oz">TÉCNICO:</td>
                 <td class="tg-yw4l"><?= $ordem->getCod_tecnico_ordem()->getNome_tecnico() ?></td>
@@ -132,8 +135,10 @@ and open the template in the editor.
         </table>
 
         <hr />
+        <br />
+        <br />
 
-                <table class="tg" style="table-layout: fixed; width: 834px">
+        <table class="tg" style="table-layout: fixed; width: 834px">
             <colgroup>
                 <col style="width: 122px">
                 <col style="width: 275px">

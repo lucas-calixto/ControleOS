@@ -129,6 +129,10 @@ class ControleOS_DAO {
             $cliente->setNome_cliente($retorno['nome_cliente']);
             $cliente->setTelefone_um_cliente($retorno['telefone_um_cliente']);
             $cliente->setEndereco_cliente($retorno['endereco_cliente']);
+            $cliente->setIp_cliente($retorno['ip_cliente']);
+            $cliente->setUser_pppoe_cliente($retorno['user_pppoe_cliente']);
+            $cliente->setPass_pppoe_cliente($retorno['pass_pppoe_cliente']);
+            $cliente->setPlano_cliente($retorno['plano_cliente']);
             $ordem->setCod_cliente_ordem($cliente);
 
             $atendente->setNome_atendente($retorno['nome_atentente']);

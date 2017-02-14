@@ -2,15 +2,15 @@
 $host = filter_input(INPUT_SERVER, 'HTTP_HOST');
 $uri = rtrim(dirname(filter_input(INPUT_SERVER, 'PHP_SELF')), '/\\');
 
-require_once './controle/OrdemControle.php';
-require_once './controle/TecnicoControle.php';
 require_once './modelo/Ordem.php';
 require_once './dao/ClienteDAO.php';
 require_once './modelo/Cliente.php';
+require_once './controle/OrdemControle.php';
+require_once './controle/TecnicoControle.php';
 
-$controle = new OrdemControle();
 $ordem = new Ordem();
 $dao = new ClienteDAO();
+$controle = new OrdemControle();
 $daoTecnico = new TecnicoControle();
 
 if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
@@ -139,7 +139,8 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
                 </div>
             </div>
         </div>
-    </div><!-- FIM DO MODAL DE NOVO -->
+    </div>
+    <!-- FIM DO MODAL DE NOVO -->
 
     <!-- INICIO DO MODAL DE EDITAR -->
     <div class="modal fade" id="editarOrdem">
@@ -181,7 +182,8 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
                 </div>
             </div>
         </div>
-    </div><!-- FIM DO MODAL DE EDITAR -->
+    </div>
+    <!-- FIM DO MODAL DE EDITAR -->
 
     <!-- INICIO DO MODAL DE BAIXAR -->
     <div class="modal fade" id="baixaOrdem">
@@ -205,6 +207,7 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
                 </div>
             </div>
         </div>
-    </div><!-- FIM DO MODAL DE BAIXAR -->
+    </div>
+    <!-- FIM DO MODAL DE BAIXAR -->
 
 </section>
