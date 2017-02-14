@@ -31,17 +31,10 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
         header("Location: http://$host$uri/$extra");
     }
 } elseif (!strcmp(filter_input(INPUT_GET, "acao"), "baixar")) {
-
+    
     $ordem->setCod_ordem(filter_input(INPUT_POST, "cod_ordem_baixar"));
     $ordem->setDesc_resolve_ordem(filter_input(INPUT_POST, "desc_resolve_ordem"));
     
-    $ordem->setData_inicio_ordem(date('Y-m-d', strtotime(filter_input(INPUT_POST, 'data_inicio'))));
-    $ordem->setData_fim_ordem(date('Y-m-d', strtotime(filter_input(INPUT_POST, 'data_fim'))));
-    $ordem->setHora_inicio_ordem(date('H:i:s', strtotime(filter_input(INPUT_POST, 'data_inicio'))));
-    $ordem->setHora_fim_ordem(date('H:i:s', strtotime(filter_input(INPUT_POST, 'data_fim'))));
-    
-    
-
     if ($controle->baixar($ordem)) {
         $resultado = "Ordem baixado com sucesso!";
         $extra = 'controle.php?pg=controleos';
@@ -51,69 +44,11 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
 ?>
 <section class="container">
     <article class="col-lg-12">
+        <h2>PÓS ATENDIMENTO</h2>
         <div class="panel panel-default">
-            <div class="panel-heading">CONTROLE DE O.S.</div>
             <div class="panel-body">
                 <div class="row">
-                    <br />
-                    <div class="col-lg-4">
-                        <form action="?pg=controleos" method="GET" class="form-horizontal">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="busca_cliente">Cliente</label>  
-                                <div class="col-md-8">
-                                    <input id="busca_cliente" name="busca_cliente" type="text" placeholder="Nome do cliente" class="form-control input-md" required="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-8 col-lg-offset-4">
-                                    <input type="submit" value="Buscar" class="btn btn-xs btn-success" />
-                                    <a href="?pg=controleos" class="btn btn-xs btn-primary">Limpar</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-lg-4">
-                        <form action="?pg=controleos" method="GET" class="form-horizontal">
-                            <!-- Select Basic -->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="cidade_cliente">Cidade</label>
-                                <div class="col-md-8">
-                                    <select id="cidade_cliente" name="cidade_cliente" class="form-control">
-                                        <option value="1">PORTEIRINHA</option>
-                                        <option value="2">RIO PARDO DE MINAS</option>
-                                        <option value="3">RIACHO DOS MACHADOS</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-8 col-lg-offset-4">
-                                    <input type="submit" value="Buscar" class="btn btn-xs btn-success" />
-                                    <a href="?pg=controleos" class="btn btn-xs btn-primary">Limpar</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-lg-4">
-                        <form action="?pg=controleos" method="GET" class="form-horizontal">
-                            <!-- Select Basic -->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="cidade_cliente">Tipo</label>
-                                <div class="col-md-8">
-                                    <select id="cidade_cliente" name="tipo_ordem" class="form-control">
-                                        <option value="1">ATIVAÇÃO</option>
-                                        <option value="5">CANCELAMENTO</option>
-                                        <option value="6">INTERNET LENTA</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-8 col-lg-offset-4">
-                                    <input type="submit" value="Buscar" class="btn btn-xs btn-success" />
-                                    <a href="?pg=controleos" class="btn btn-xs btn-primary">Limpar</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -122,16 +57,16 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
                 <tr>
                     <th class="col-lg-1">Codigo</th>
                     <th class="col-lg-3">Cliente</th>
-                    <th class="col-lg-3">Descrição</th>
+                    <th class="col-lg-4">Descrição</th>
                     <th class="col-lg-2">Data de Cadastro</th>
-                    <th class="col-lg-2">Tipo</th>
+                    <th class="col-lg-1">Status</th>
                     <th class="col-lg-1 text-center">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 $qtd = count($controle->lista(0, 1000));
-                $qtd_reg = 10;
+                $qtd_reg = 5;
                 $qtd_pag = ceil($qtd / $qtd_reg);
                 $pag_atual = filter_input(INPUT_GET, 'pag');
 
@@ -144,24 +79,8 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
                     $inicio = ($qtd_reg * $pag) - $qtd_reg;
                     $fim = $qtd_reg;
                 }
-                
-                $nome_cliente = "";
-                $cidade_cliente = "";
-                $tipo_ordem = "";
-                
-                if(!empty(filter_input(INPUT_GET, "busca_cliente"))) {
-                    $nome_cliente = filter_input(INPUT_GET, "busca_cliente");
-                }
-                
-                if(!empty(filter_input(INPUT_GET, "cidade_cliente"))) {
-                    $cidade_cliente = filter_input(INPUT_GET, "cidade_cliente");
-                }
-                
-                if(!empty(filter_input(INPUT_GET, "tipo_ordem"))) {
-                    $tipo_ordem = filter_input(INPUT_GET, "tipo_ordem");
-                }
 
-                foreach ($controle->lista($inicio, $fim, $nome_cliente, $cidade_cliente, $tipo_ordem) as $ordem) {
+                foreach ($controle->lista($inicio, $fim) as $ordem) {
                     ?>
                     <tr>
                         <td><?= $ordem->getCod_ordem() ?></td>
@@ -171,7 +90,7 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
                             ?></td>
                         <td><?= $ordem->getDesc_ordem() ?></td>
                         <td><?= date('d/m/Y', strtotime($ordem->getData_cad_ordem())) . ' - ' . date('H:i', strtotime($ordem->getHora_cad_ordem())) ?></td>
-                        <td><?= $ordem->getCod_tipo_ordem()->getDesc_tipo() ?></td>
+                        <td><?= $ordem->getStatus_ordem() ?></td>
                         <td class="text-right">
                             <a href="" title="Baixar" data-toggle="modal" data-target="#baixaOrdem" onclick="preencheBaixar(<?= $ordem->getCod_ordem() ?>)"><span class="glyphicon glyphicon-ok-circle blue" aria-hidden="true"></span></a>
                             <a href="" title="Editar" data-toggle="modal" data-target="#editarOrdem" onclick="preencheEditar(<?= $ordem->getCod_ordem() ?>, '<?= $ordem->getDesc_total_ordem() ?>', <?= $ordem->getCod_tecnico_ordem() ?>)"><span class="glyphicon glyphicon-refresh orange" aria-hidden="true"></span></a>
@@ -190,6 +109,7 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
                 <?php for ($ln = 0; $ln < $qtd_pag; $ln++) { ?>
                     <a href="?pg=controleos&pag=<?= $ln + 1 ?>" class="btn btn-sm btn-primary"><?= $ln + 1 ?></a>
                 <?php } ?>
+                <a href="?pg=controleos&pag=<?= $qtd_pag ?>" class="btn btn-sm btn-primary">>></a>
             </div>
         </div>
         <br />
@@ -242,7 +162,7 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
                         <span class="help-block">Tecnico responsável</span>  
                         <div class="radio">
                             <label>
-                                <input type="radio" name="radioStatus" value="PENDENTE" checked=""/>
+                                <input type="radio" name="radioStatus" value="ANDAMENTO" checked=""/>
                                 Em Andamento
                             </label>
                         </div>
@@ -277,10 +197,6 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
                     <form action="controle.php?pg=controleos&acao=baixar" method="POST">
                         <textarea class="form-control" name="desc_resolve_ordem" rows="3" id="txt_desc_ordem"></textarea>
                         <span class="help-block">Descrição detalhada dos serviços.</span>  
-                        <input type="datetime-local" class="form-control" name="data_inicio" />
-                        <span class="help-block">Data e hora de inicio.</span>  
-                        <input type="datetime-local" class="form-control" name="data_fim" />
-                        <span class="help-block">Data e hora fim.</span>  
                         <br />
                         <input type="hidden" value="" name="cod_ordem_baixar" id="cod_ordem_baixar" />
                         <input type="submit" value="Gravar" class="btn btn-success btn-sm btn-block"  onclick="return confirm('Deseja baixar esta Ordem de Serviço?')" />

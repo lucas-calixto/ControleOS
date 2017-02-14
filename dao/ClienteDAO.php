@@ -56,5 +56,25 @@ class ClienteDAO {
             echo $ex->getMessage();
         }
     }
+    
+    public function buscaDinamica($consulta) {
+        try {
+            $sql = "SELECT * FROM clientes WHERE nome_cliente LIKE '%" . $consulta . "%'";
 
+            $nomes = [];
+            
+            $retorno = $this->banco->ExecuteQuery($sql);
+
+            foreach ($retorno as $ln) {
+                
+                $nomeCliente = $ln['nome_cliente'];
+
+                $nomes[] = $nomeCliente;
+            }
+
+            return $nomes;
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+        }
+    }
 }

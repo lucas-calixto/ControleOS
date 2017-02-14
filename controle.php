@@ -7,9 +7,10 @@
         <title>Controle de O.S.</title>
 
         <!-- Bootstrap -->
-        <link href="https://bootswatch.com/flatly/bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link href="css/estilo.css" rel="stylesheet">
         <link href="css/jquery-editable-select.min.css" rel="stylesheet">
+        <link href="css/jquery-ui-1.10.0.custom.css" rel="stylesheet">
 
         <link rel="icon" type="image/png" sizes="32x32" href="imagens/favicon-32x32.png">
 
@@ -31,7 +32,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="?pg=controleos"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span> Ordens de Serviço</a>
+                        <a class="navbar-brand" href="?pg=controleos"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span> Tec Port</a>
                     </div>
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -88,6 +89,9 @@
             case "imprimiros":
                 require_once './visao/imprimiros.php';
                 break;
+            case "atendimento":
+                require_once './visao/atendimento.php';
+                break;
             default:
                 require_once './visao/controleos.php';
         }
@@ -103,14 +107,16 @@
         </div>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery-editable-select.min.js"></script>
+        <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
         <script>
-            window.onload = function () {
-                $('#select').editableSelect({filter: true, effects: 'default'});
-            };
+            $(function () {
+                $("#busca_cliente").autocomplete({
+                    source: 'searchc.php'
+                });
+            });
 
             function preencheEditar(valor, txtOrdem, codTecnico) {
                 document.getElementById('cod_ordem').value = valor;

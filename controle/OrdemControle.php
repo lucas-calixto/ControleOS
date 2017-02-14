@@ -14,8 +14,8 @@ class OrdemControle {
         return $this->dao->cadastra($ordem);
     }
     
-    public function lista($inicio, $fim) {
-        return $this->dao->lista($inicio, $fim);
+    public function lista($inicio, $fim, $nome_cliente = "", $cidade_cliente = "", $tipo_os = "") {
+        return $this->dao->lista($inicio, $fim, $nome_cliente, $cidade_cliente, $tipo_os);
     }
     
     public function editar(Ordem $ordem) {

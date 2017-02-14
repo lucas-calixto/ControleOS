@@ -44,12 +44,16 @@ class ControleOS_DAO {
         }
     }
 
-    public function lista($inicio, $fim) {
+    public function lista($inicio, $fim, $nome_cliente = "", $cidade_cliente = "", $tipo_os = "") {
         try {
             $sql = "SELECT * FROM ordens"
                     . " INNER JOIN clientes ON ordens.cod_cliente_ordem = clientes.cod_cliente"
-                    . " WHERE ordens.status_ordem LIKE 'ABERTA' OR ordens.status_ordem LIKE 'ANDAMENTO'"
-                    . " ORDER BY data_cad_ordem, hora_cad_ordem DESC"
+                    . " INNER JOIN tipos ON ordens.cod_tipo_ordem = tipos.cod_tipo"
+                    . " WHERE (ordens.status_ordem LIKE 'ABERTA' OR ordens.status_ordem LIKE 'PENDENTE')"
+                    . " AND (clientes.nome_cliente LIKE '%" . $nome_cliente . "%'"
+                    . " AND clientes.cod_cidade_cliente LIKE '%" . $cidade_cliente . "%'"
+                    . " AND ordens.cod_tipo_ordem LIKE '%" . $tipo_os . "%')"
+                    . " ORDER BY hora_cad_ordem, data_cad_ordem DESC"
                     . " LIMIT :inicio, :fim";
 
             $parametros = array(
@@ -63,6 +67,10 @@ class ControleOS_DAO {
             foreach ($retorno as $ln) {
                 $ordem = new Ordem();
                 $cliente = new Cliente();
+                $tipo = new Tipo();
+
+                $tipo->setDesc_tipo($ln['desc_tipo']);
+                $ordem->setCod_tipo_ordem($tipo);
 
                 $ordem->setCod_ordem($ln['cod_ondem']);
                 $cliente->setNome_cliente($ln['nome_cliente']);
@@ -157,7 +165,8 @@ class ControleOS_DAO {
         }
     }
 
-    public function excluir($cod) {
+    public
+            function excluir($cod) {
         try {
             $sql = "UPDATE ordens SET status_ordem = 'EXCLUIDA' WHERE cod_ondem = :cod";
 
@@ -170,15 +179,20 @@ class ControleOS_DAO {
             echo $ex->getMessage();
         }
     }
-    
-    public function baixar(Ordem $ordem) {
+
+    public
+            function baixar(Ordem $ordem) {
         try {
             $sql = "UPDATE ordens"
-                    . " SET status_ordem = 'BAIXADA', desc_resolve_ordem = :desc_resolve"
+                    . " SET status_ordem = 'BAIXADA', desc_resolve_ordem = :desc_resolve, data_inicio_ordem = :data_inicio, data_fim_ordem = :data_fim, hora_inicio_ordem = :hora_inicio, hora_fim_ordem = :hora_fim"
                     . " WHERE cod_ondem = :cod";
 
             $parametros = array(
                 ":cod" => $ordem->getCod_ordem(),
+                ":data_inicio" => $ordem->getData_inicio_ordem(),
+                ":data_fim" => $ordem->getData_fim_ordem(),
+                ":hora_inicio" => $ordem->getHora_inicio_ordem(),
+                ":hora_fim" => $ordem->getHora_fim_ordem(),
                 ":desc_resolve" => $ordem->getDesc_resolve_ordem()
             );
 
