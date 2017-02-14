@@ -89,11 +89,11 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
                             echo $cliente->getNome_cliente();
                             ?></td>
                         <td><?= $ordem->getDesc_ordem() ?></td>
-                        <td><?= date('d/m/Y', strtotime($ordem->getData_cad_ordem())) ?></td>
+                        <td><?= date('d/m/Y', strtotime($ordem->getData_cad_ordem())) . ' - ' . date('H:i', strtotime($ordem->getHora_cad_ordem())) ?></td>
                         <td><?= $ordem->getStatus_ordem() ?></td>
                         <td class="text-right">
                             <a href="" title="Baixar" data-toggle="modal" data-target="#baixaOrdem" onclick="preencheBaixar(<?= $ordem->getCod_ordem() ?>)"><span class="glyphicon glyphicon-ok-circle blue" aria-hidden="true"></span></a>
-                            <a href="" title="Editar" data-toggle="modal" data-target="#editarOrdem" onclick="preencheEditar(<?= $ordem->getCod_ordem() ?>, '<?= $ordem->getDesc_total_ordem() ?>', <?= $ordem->getCod_tecnico_ordem() ?>)"><span class="glyphicon glyphicon-circle-arrow-up orange" aria-hidden="true"></span></a>
+                            <a href="" title="Editar" data-toggle="modal" data-target="#editarOrdem" onclick="preencheEditar(<?= $ordem->getCod_ordem() ?>, '<?= $ordem->getDesc_total_ordem() ?>', <?= $ordem->getCod_tecnico_ordem() ?>)"><span class="glyphicon glyphicon-refresh orange" aria-hidden="true"></span></a>
                             <a href="?pg=controleos&acao=excluir&cod_ordem=<?= $ordem->getCod_ordem() ?>" title="Exclir" onclick="return confirm('Deseja excluir este registro?')"><span class="glyphicon glyphicon-remove-circle red" aria-hidden="true"></span></a>
                             <a href="visao/imprimiros.php?cod_ordem=<?= $ordem->getCod_ordem() ?>" title="Imprimir" target="_blank"><span class="glyphicon glyphicon-info-sign green" aria-hidden="true"></span></a>
                         </td>

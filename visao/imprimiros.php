@@ -40,7 +40,7 @@ and open the template in the editor.
             .tg  {border-collapse:collapse;border-spacing:0;}
             .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
             .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
-            .tg .tg-d55q{font-weight:bold;font-size:14px;vertical-align:top;text-align:right}
+            .tg .tg-d55q{font-weight: bold;font-size:14px;vertical-align:bottom;text-align:right}
             .tg .tg-e3zv{font-weight:bold;text-align:left}
             .tg .tg-yw4l{vertical-align:top;text-align:left}
             .tg .tg-l2oz{font-weight:bold;text-align:right;vertical-align:top}
@@ -52,15 +52,15 @@ and open the template in the editor.
                 <col style="width: 122px">
                 <col style="width: 275px">
                 <col style="width: 46px">
-                <col style="width: 266px">
-                <col style="width: 125px">
+                <col style="width: 256px">
+                <col style="width: 135px">
             </colgroup>
             <tr>
                 <th class="tg-e3zv">CLIENTE:</th>
                 <th class="tg-yw4l text-capitalize"><?= $cliente->getNome_cliente() ?></th>
                 <th class="tg-yw4l"></th>
                 <th class="tg-l2oz">DATA SOLICITAÇÃO:</th>
-                <th class="tg-d55q"><?= date('d/m/Y', strtotime($ordem->getData_cad_ordem())) ?></th>
+                <th class="tg-d55q"><?= date('d/m/Y', strtotime($ordem->getData_cad_ordem())) . ' - ' . date('H:i', strtotime($ordem->getHora_cad_ordem())) ?></th>
             </tr>
             <tr>
                 <td class="tg-9hbo">SOLICITANTE:</td>

@@ -23,9 +23,9 @@ class ControleOS_DAO {
         try {
             $sql = "INSERT INTO"
                     . " ordens"
-                    . " (cod_atendente_ordem, cod_cliente_ordem, cod_tipo_ordem, desc_ordem, cod_tecnico_ordem, desc_total_ordem, status_ordem, solicita_ordem, data_cad_ordem)"
+                    . " (cod_atendente_ordem, cod_cliente_ordem, cod_tipo_ordem, desc_ordem, cod_tecnico_ordem, desc_total_ordem, status_ordem, solicita_ordem, data_cad_ordem, hora_cad_ordem)"
                     . " VALUES"
-                    . " (:cod_atendente, :cod_cliente, :cod_tipo, :desc_ordem, :cod_tecnico, :desc_total, :status_ordem, :solicita_ordem, NOW())";
+                    . " (:cod_atendente, :cod_cliente, :cod_tipo, :desc_ordem, :cod_tecnico, :desc_total, :status_ordem, :solicita_ordem, NOW(), NOW())";
 
             $parametros = array(
                 ":cod_atendente" => $ordem->getCod_atendente_ordem(),
@@ -49,7 +49,7 @@ class ControleOS_DAO {
             $sql = "SELECT * FROM ordens"
                     . " INNER JOIN clientes ON ordens.cod_cliente_ordem = clientes.cod_cliente"
                     . " WHERE ordens.status_ordem LIKE 'ABERTA' OR ordens.status_ordem LIKE 'ANDAMENTO'"
-                    . " ORDER BY data_cad_ordem DESC"
+                    . " ORDER BY data_cad_ordem, hora_cad_ordem DESC"
                     . " LIMIT :inicio, :fim";
 
             $parametros = array(
@@ -69,6 +69,7 @@ class ControleOS_DAO {
                 $ordem->setCod_cliente_ordem($cliente);
                 $ordem->setDesc_ordem($ln['desc_ordem']);
                 $ordem->setData_cad_ordem($ln['data_cad_ordem']);
+                $ordem->setHora_cad_ordem($ln['hora_cad_ordem']);
                 $ordem->setStatus_ordem($ln['status_ordem']);
                 $ordem->setDesc_total_ordem($ln['desc_total_ordem']);
                 $ordem->setCod_tecnico_ordem($ln['cod_tecnico_ordem']);
@@ -141,6 +142,7 @@ class ControleOS_DAO {
 
             $ordem->setDesc_ordem($retorno['desc_ordem']);
             $ordem->setData_cad_ordem($retorno['data_cad_ordem']);
+            $ordem->setHora_cad_ordem($retorno['hora_cad_ordem']);
             $ordem->setStatus_ordem($retorno['status_ordem']);
             $ordem->setSolicitatante_ordem($retorno['solicita_ordem']);
             $ordem->setDesc_total_ordem($retorno['desc_total_ordem']);

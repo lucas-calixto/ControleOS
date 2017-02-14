@@ -40,10 +40,10 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Arquivo <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li class="divider"></li>
-                                    <li><a href="?pg=usuario">Cadastro de Usuários</a></li>
-                                    <li><a href="?pg=atendente">Cadastro de Atendentes</a></li>
-                                    <li><a href="?pg=tecnico">Cadastro de Tecnicos</a></li>
-                                    <li><a href="?pg=tipo">Cadastro de Tipos</a></li>
+                                    <li><a href="?pg=usuario"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Cadastro de Usuários</a></li>
+                                    <!--<li><a href="?pg=atendente">Cadastro de Atendentes</a></li>-->
+                                    <li><a href="?pg=tecnico"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Cadastro de Tecnicos</a></li>
+                                    <li><a href="?pg=tipo"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Cadastro de Tipos</a></li>
                                 </ul>
                             </li>
                             <li><a href="?pg=controleos">Controle</a></li>
