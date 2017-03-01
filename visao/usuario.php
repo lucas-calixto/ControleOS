@@ -103,6 +103,16 @@ if (!$acao) {
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-md-2 control-label" for="cidade_cliente">Cidade</label>
+                        <div class="col-md-10">
+                            <select id="cidade_cliente" name="cidade_cliente" class="form-control">
+                                <option value="1">PORTEIRINHA</option>
+                                <option value="2">RIO PARDO DE MINAS</option>
+                                <option value="3">RIACHO DOS MACHADOS</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
                             <?php if (!strcmp($acao, "gravar")) { ?>
                                 <input type="hidden" value="gravar" />
@@ -159,7 +169,7 @@ if (!$acao) {
                 <?php for ($ln = 0; $ln < $qtd_pag; $ln++) { ?>
                     <a href="?pg=usuario&pag=<?= $ln + 1 ?>" class="btn btn-sm btn-primary"><?= $ln + 1 ?></a>
                 <?php } ?>
-                    <a href="?pg=usuario&pag=<?= $qtd_pag ?>" class="btn btn-sm btn-primary">>></a>
+                <a href="?pg=usuario&pag=<?= $qtd_pag ?>" class="btn btn-sm btn-primary">>></a>
             </div>
         </div>
         <br />

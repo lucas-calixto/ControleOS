@@ -7,12 +7,15 @@
         <title>Controle de O.S.</title>
 
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        
+        <link href="https://bootswatch.com/yeti/bootstrap.css" rel="stylesheet">
         <link href="css/estilo.css" rel="stylesheet">
         <link href="css/jquery-editable-select.min.css" rel="stylesheet">
         <link href="css/jquery-ui-1.10.0.custom.css" rel="stylesheet">
 
         <link rel="icon" type="image/png" sizes="32x32" href="imagens/favicon-32x32.png">
+        
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -49,7 +52,7 @@
                             </li>
                             <li><a href="?pg=controleos">Controle</a></li>
                             <li><a href="?pg=atendimento">Atendimentos</a></li>
-                            <li><a href="?pg=relatorio">Relatorios</a></li>
+                            <li><a href="?pg=relatorios">Relatorios</a></li>
                             <!--<li><a href="?pg=log">Logs</a></li>-->
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
@@ -91,6 +94,9 @@
                 break;
             case "atendimento":
                 require_once './visao/atendimento.php';
+                break;
+            case "relatorios":
+                require_once './visao/relatorios.php';
                 break;
             default:
                 require_once './visao/controleos.php';

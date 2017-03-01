@@ -17,12 +17,14 @@ class UsuarioDAO {
 
     public function cadastra(Usuario $usuario) {
         try {
-            $sql = "INSERT INTO usuarios (nome_usuario, login_usuario, senha_usuario) VALUES (:nome, :login, :senha)";
+            $sql = "INSERT INTO usuarios (nome_usuario, login_usuario, senha_usuario, cidade_usuario)"
+                    . " VALUES (:nome, :login, :senha, :cidade)";
 
             $parametros = array(
                 ":nome" => $usuario->getNome_usuario(),
                 ":login" => $usuario->getLogin_usuario(),
-                ":senha" => $usuario->getSenha_usuario()
+                ":senha" => $usuario->getSenha_usuario(),
+                ":senha" => $usuario->getCidade_usuario()
             );
 
             return $this->banco->ExecuteNonQuery($sql, $parametros);

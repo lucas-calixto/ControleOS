@@ -6,6 +6,7 @@ class Usuario {
     private $nome_usuario;
     private $login_usuario;
     private $senha_usuario;
+    private $cidade_usuario;
     
     
     function getCod_usuario() {
@@ -39,4 +40,13 @@ class Usuario {
     function setSenha_usuario($senha_usuario) {
         $this->senha_usuario = $senha_usuario;
     }
+    
+    function getCidade_usuario() {
+        return $this->cidade_usuario;
+    }
+
+    function setCidade_usuario($cidade_usuario) {
+        $this->cidade_usuario = $cidade_usuario;
+    }
+
 }
