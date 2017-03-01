@@ -34,13 +34,13 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
 
     $ordem->setCod_ordem(filter_input(INPUT_POST, "cod_ordem_baixar"));
     $ordem->setDesc_resolve_ordem(filter_input(INPUT_POST, "desc_resolve_ordem"));
-    
+
     $ordem->setData_inicio_ordem(date('Y-m-d', strtotime(filter_input(INPUT_POST, 'data_inicio'))));
     $ordem->setData_fim_ordem(date('Y-m-d', strtotime(filter_input(INPUT_POST, 'data_fim'))));
     $ordem->setHora_inicio_ordem(date('H:i:s', strtotime(filter_input(INPUT_POST, 'data_inicio'))));
     $ordem->setHora_fim_ordem(date('H:i:s', strtotime(filter_input(INPUT_POST, 'data_fim'))));
-    
-    
+
+
 
     if ($controle->baixar($ordem)) {
         $resultado = "Ordem baixado com sucesso!";
@@ -144,20 +144,20 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
                     $inicio = ($qtd_reg * $pag) - $qtd_reg;
                     $fim = $qtd_reg;
                 }
-                
+
                 $nome_cliente = "";
                 $cidade_cliente = "";
                 $tipo_ordem = "";
-                
-                if(!empty(filter_input(INPUT_GET, "busca_cliente"))) {
+
+                if (!empty(filter_input(INPUT_GET, "busca_cliente"))) {
                     $nome_cliente = filter_input(INPUT_GET, "busca_cliente");
                 }
-                
-                if(!empty(filter_input(INPUT_GET, "cidade_cliente"))) {
+
+                if (!empty(filter_input(INPUT_GET, "cidade_cliente"))) {
                     $cidade_cliente = filter_input(INPUT_GET, "cidade_cliente");
                 }
-                
-                if(!empty(filter_input(INPUT_GET, "tipo_ordem"))) {
+
+                if (!empty(filter_input(INPUT_GET, "tipo_ordem"))) {
                     $tipo_ordem = filter_input(INPUT_GET, "tipo_ordem");
                 }
 
@@ -205,11 +205,14 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
                 </div>
                 <div class="modal-body">
                     <form action="controle.php?pg=novaos" method="POST">
-                        <select class="form-control" name="cod_cliente" id="" required="">
-                            <?php foreach ($dao->lista() as $cliente) { ?>
-                                <option value="<?= $cliente->getCod_cliente() ?>"><?= $cliente->getNome_cliente() ?></option>
-                            <?php } ?>
-                        </select>
+                        <div class="ui-widget">
+                            <select class="form-control" name="cod_cliente" id="combobox" required="">
+                                <option value="">Selecione</option>
+                                <?php foreach ($dao->lista() as $cliente) { ?>
+                                <option value="<?= $cliente->getCod_cliente() ?>"><?= $cliente->getCod_cliente() ?> - <?= $cliente->getNome_cliente() ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
                         <br />
                         <input type="submit" value="Selecionar" class="btn btn-success btn-sm btn-block"/>
                     </form>
