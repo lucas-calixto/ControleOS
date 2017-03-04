@@ -1,10 +1,14 @@
 <?php
 $host = filter_input(INPUT_SERVER, 'HTTP_HOST');
 $uri = rtrim(dirname(filter_input(INPUT_SERVER, 'PHP_SELF')), '/\\');
+
 require_once './controle/UsuarioControle.php';
 require_once './modelo/Usuario.php';
+require_once './dao/CidadeDAO.php';
+
 $controle = new UsuarioControle();
 $usuario = new Usuario();
+$cidadeDAO = new CidadeDAO();
 
 $nome_usuario = "";
 $login_usuario = "";
@@ -17,6 +21,7 @@ if (!$acao) {
     $usuario->setNome_usuario(filter_input(INPUT_POST, "nome_usuario"));
     $usuario->setLogin_usuario(filter_input(INPUT_POST, "login_usuario"));
     $usuario->setSenha_usuario(filter_input(INPUT_POST, "senha_usuario"));
+    $usuario->setCidade_usuario(filter_input(INPUT_POST, "cidade_usuario"));
 
     if ($controle->cadastra($usuario)) {
         $resultado = "Usuário cadastrado com sucesso!";
@@ -32,6 +37,7 @@ if (!$acao) {
     $usuario->setNome_usuario(filter_input(INPUT_POST, "nome_usuario"));
     $usuario->setLogin_usuario(filter_input(INPUT_POST, "login_usuario"));
     $usuario->setSenha_usuario(filter_input(INPUT_POST, "senha_usuario"));
+    $usuario->setCidade_usuario(filter_input(INPUT_POST, "cidade_usuario"));
     if ($controle->editar($usuario)) {
         $resultado = "Usuário editado com sucesso!";
         $extra = 'controle.php?pg=usuario';
@@ -103,12 +109,14 @@ if (!$acao) {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label" for="cidade_cliente">Cidade</label>
+                        <label class="col-md-2 control-label" for="cidade_usuario">Cidade</label>
                         <div class="col-md-10">
-                            <select id="cidade_cliente" name="cidade_cliente" class="form-control">
-                                <option value="1">PORTEIRINHA</option>
-                                <option value="2">RIO PARDO DE MINAS</option>
-                                <option value="3">RIACHO DOS MACHADOS</option>
+                            <select id="cidade_usuario" name="cidade_usuario" class="form-control">
+                                <?php
+                                foreach ($cidadeDAO->listar() as $ln) {
+                                ?>
+                                    <option value="<?= $ln->getCod_cidade() ?>"><?= $ln->getDesc_cidade() ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>

@@ -17,7 +17,7 @@ class ClienteDAO {
 
     public function lista() {
         try {
-            $sql = "SELECT cod_cliente, nome_cliente FROM clientes";
+            $sql = "SELECT cod_cliente, nome_cliente, cod_pers_cliente FROM clientes";
 
             $clientes = [];
 
@@ -27,6 +27,7 @@ class ClienteDAO {
                 $cliente = new Cliente();
                 $cliente->setCod_cliente($ln['cod_cliente']);
                 $cliente->setNome_cliente($ln['nome_cliente']);
+                $cliente->setCod_pers_cliente($ln['cod_pers_cliente']);
 
                 $clientes[] = $cliente;
             }

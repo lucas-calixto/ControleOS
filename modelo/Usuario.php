@@ -1,15 +1,20 @@
 <?php
 
+include_once BASE_DIR . 'modelo' . DS . 'Cidade.php';
+
 class Usuario {
-    
+
     private $cod_usuario;
     private $nome_usuario;
     private $login_usuario;
     private $senha_usuario;
     private $cidade_usuario;
     
-    
-    function getCod_usuario() {
+    function __construct() {
+        $this->cidade_usuario = new Cidade();
+    }
+
+        function getCod_usuario() {
         return $this->cod_usuario;
     }
 
@@ -40,7 +45,7 @@ class Usuario {
     function setSenha_usuario($senha_usuario) {
         $this->senha_usuario = $senha_usuario;
     }
-    
+
     function getCidade_usuario() {
         return $this->cidade_usuario;
     }

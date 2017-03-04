@@ -24,7 +24,7 @@ class UsuarioDAO {
                 ":nome" => $usuario->getNome_usuario(),
                 ":login" => $usuario->getLogin_usuario(),
                 ":senha" => $usuario->getSenha_usuario(),
-                ":senha" => $usuario->getCidade_usuario()
+                ":cidade" => $usuario->getCidade_usuario()
             );
 
             return $this->banco->ExecuteNonQuery($sql, $parametros);
@@ -64,11 +64,15 @@ class UsuarioDAO {
     public function editar(Usuario $usuario) {
 
         try {
-            $sql = "UPDATE usuarios SET nome_usuario = :nome, login_usuario = :login, senha_usuario = :senha WHERE cod_usuario = :cod";
+            $sql = "UPDATE usuarios SET"
+                    . " nome_usuario = :nome, login_usuario = :login, senha_usuario = :senha, cidade_usuario = :cidade"
+                    . " WHERE"
+                    . " cod_usuario = :cod";
             $parametros = array(
                 ":nome" => $usuario->getNome_usuario(),
                 ":login" => $usuario->getLogin_usuario(),
                 ":senha" => $usuario->getSenha_usuario(),
+                ":cidade" => $usuario->getCidade_usuario(),
                 ":cod" => $usuario->getCod_usuario()
             );
 

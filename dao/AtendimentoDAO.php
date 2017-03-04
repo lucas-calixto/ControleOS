@@ -54,7 +54,7 @@ class AtendimentoDAO {
                     . " WHERE (ordens.status_ordem LIKE 'BAIXADA')"
                     . " AND (clientes.nome_cliente LIKE '%" . $nome_cliente . "%'"
                     . " AND clientes.cod_cidade_cliente LIKE '%" . $cidade_cliente . "%')"
-                    . " ORDER BY hora_cad_ordem, data_cad_ordem ASC"
+                    . " ORDER BY data_cad_ordem DESC"
                     . " LIMIT :inicio, :fim";
 
             $parametros = array(

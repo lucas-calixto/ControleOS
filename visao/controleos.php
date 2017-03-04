@@ -4,14 +4,18 @@ $uri = rtrim(dirname(filter_input(INPUT_SERVER, 'PHP_SELF')), '/\\');
 
 require_once './modelo/Ordem.php';
 require_once './dao/ClienteDAO.php';
+require_once './dao/CidadeDAO.php';
 require_once './modelo/Cliente.php';
 require_once './controle/OrdemControle.php';
+require_once './controle/TipoControle.php';
 require_once './controle/TecnicoControle.php';
 
 $ordem = new Ordem();
 $dao = new ClienteDAO();
 $controle = new OrdemControle();
 $daoTecnico = new TecnicoControle();
+$cidadeDao = new CidadeDAO();
+$tipoControle = new TipoControle();
 
 if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
 
@@ -79,9 +83,9 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
                                 <label class="col-md-4 control-label" for="cidade_cliente">Cidade</label>
                                 <div class="col-md-8">
                                     <select id="cidade_cliente" name="cidade_cliente" class="form-control">
-                                        <option value="1">PORTEIRINHA</option>
-                                        <option value="2">RIO PARDO DE MINAS</option>
-                                        <option value="3">RIACHO DOS MACHADOS</option>
+                                        <?php foreach ($cidadeDao->listar() as $ln) { ?>
+                                            <option value="<?= $ln->getCod_cidade() ?>"><?= $ln->getDesc_cidade() ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -97,12 +101,12 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
                         <form action="?pg=controleos" method="GET" class="form-horizontal">
                             <!-- Select Basic -->
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="cidade_cliente">Tipo</label>
+                                <label class="col-md-4 control-label" for="tipo_ordem">Tipo</label>
                                 <div class="col-md-8">
-                                    <select id="cidade_cliente" name="tipo_ordem" class="form-control">
-                                        <option value="1">ATIVAÇÃO</option>
-                                        <option value="5">CANCELAMENTO</option>
-                                        <option value="6">INTERNET LENTA</option>
+                                    <select id="tipo_ordem" name="tipo_ordem" class="form-control">
+                                        <?php foreach ($tipoControle->lista(0, 100) as $lnTipo) { ?>
+                                            <option value="<?= $lnTipo->getCod_tipo() ?>"><?= $lnTipo->getDesc_tipo() ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -209,7 +213,7 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
                             <select class="form-control" name="cod_cliente" id="combobox" required="">
                                 <option value="">Selecione</option>
                                 <?php foreach ($dao->lista() as $cliente) { ?>
-                                <option value="<?= $cliente->getCod_cliente() ?>"><?= $cliente->getCod_cliente() ?> - <?= $cliente->getNome_cliente() ?></option>
+                                <option value="<?= $cliente->getCod_cliente() ?>"><?= $cliente->getCod_pers_cliente() ?> - <?= $cliente->getNome_cliente() ?></option>
                                 <?php } ?>
                             </select>
                         </div>
