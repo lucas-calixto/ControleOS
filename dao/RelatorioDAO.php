@@ -3,9 +3,6 @@
 require_once BASE_DIR . 'banco' . DS . 'Banco.php';
 require_once BASE_DIR . 'modelo' . DS . 'Tipo.php';
 require_once BASE_DIR . 'modelo' . DS . 'Ordem.php';
-require_once BASE_DIR . 'modelo' . DS . 'Tecnico.php';
-require_once BASE_DIR . 'modelo' . DS . 'Cliente.php';
-require_once BASE_DIR . 'modelo' . DS . 'Atendente.php';
 
 
 class RelatorioDAO {
@@ -105,7 +102,7 @@ public function lista($inicio, $fim, $nome_cliente = "", $cidade_cliente = "") {
 
                 $tipo = $ln['desc_tipo'];
 
-                if (!strcmp($data, $mes) and ! strcmp($tipo, 'CANCELAMENTO')) {
+                if (!strcmp($data, $mes) and !strcmp($tipo, 'CANCELAMENTO')) {
                     $cont++;
                 }
             }
@@ -163,9 +160,10 @@ public function lista($inicio, $fim, $nome_cliente = "", $cidade_cliente = "") {
                     $cont++;
                 }
             }
+            
+            $resultado = $tempo / ($cont == 0 ? 1 : $cont);
 
-
-            return $tempo / $cont;
+            return $resultado;
         } catch (PDOException $ex) {
             echo $ex->getMessage();
         }
