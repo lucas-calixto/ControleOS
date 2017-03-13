@@ -38,7 +38,11 @@ class UsuarioControle {
 
     public function busca($cod) { 
         return $this->dao->busca($cod);
-    } 
+    }
+    
+    public function buscaAutentica($login, $senha) {
+        return $this->dao->buscaAutentica($login, $senha);
+    }
     
     public function excluir($cod) { 
         return $this->dao->excluir($cod);

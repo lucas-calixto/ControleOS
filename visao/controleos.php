@@ -159,6 +159,8 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
 
                 if (!empty(filter_input(INPUT_GET, "cidade_cliente"))) {
                     $cidade_cliente = filter_input(INPUT_GET, "cidade_cliente");
+                } else {
+                    $cidade_cliente = $login = $_SESSION["cidade"];
                 }
 
                 if (!empty(filter_input(INPUT_GET, "tipo_ordem"))) {

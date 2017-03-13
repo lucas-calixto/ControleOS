@@ -1,3 +1,16 @@
+<?php
+$host = filter_input(INPUT_SERVER, 'HTTP_HOST');
+$uri = rtrim(dirname(filter_input(INPUT_SERVER, 'PHP_SELF')), '/\\');
+
+session_start();
+
+$login = $_SESSION["login"];
+
+if ($login ==  null) {
+    $extra = 'index.php';
+    header("Location: http://$host$uri/$extra");
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -13,7 +26,7 @@
         <link href="css/jquery-ui-1.10.0.custom.css" rel="stylesheet">
 
         <link rel="icon" type="image/png" sizes="32x32" href="imagens/favicon-32x32.png">
-        
+
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -55,7 +68,7 @@
                             <!--<li><a href="?pg=log">Logs</a></li>-->
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#" title="Sair"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
+                            <li><a href="logout.php" title="Sair"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
                         </ul>
                     </div>
                 </div>

@@ -115,6 +115,8 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "gravar")) {
                 
                 if(!empty(filter_input(INPUT_POST, "cidade_cliente"))) {
                     $cidade_cliente = filter_input(INPUT_POST, "cidade_cliente");
+                } else {
+                    $cidade_cliente = $login = $_SESSION["cidade"];
                 }
 
                 foreach ($controle->lista($inicio, $fim, $nome_cliente, $cidade_cliente) as $ordem) {

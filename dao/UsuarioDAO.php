@@ -103,6 +103,30 @@ class UsuarioDAO {
         }
     }
     
+    public function buscaAutentica($login, $senha) {
+        try {
+            $sql = "SELECT cod_usuario, nome_usuario, login_usuario, cidade_usuario FROM usuarios"
+                    . " WHERE nome_usuario LIKE :login AND senha_usuario LIKE :senha";
+
+            $parametros = array(
+                ":login" => $login,
+                ":senha" => $senha
+            );
+
+            $retorno = $this->banco->ExecuteQueryOneRow($sql, $parametros);
+
+            $usuario = new Usuario();
+            $usuario->setCod_usuario($retorno['cod_usuario']);
+            $usuario->setNome_usuario($retorno['nome_usuario']);
+            $usuario->setLogin_usuario($retorno['login_usuario']);
+            $usuario->setCidade_usuario($retorno['cidade_usuario']);
+
+            return $usuario;
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+        }
+    }
+    
     public function excluir($cod) {
         try {
             $sql = "DELETE FROM usuarios WHERE cod_usuario = :cod";

@@ -21,25 +21,27 @@
     <body>
         <div class="container">
 
-            <div class="formulario">
+            <div class="col-lg-6 col-lg-offset-3">
                 <form class="form-horizontal" method="POST" action="autentica.php">
                     <fieldset>
-                        <legend>Controle de O.S.</legend>
-                        <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label">Usuário</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="user" placeholder="Usuário">
+                        <div class="well">
+                            <legend>Controle de O.S.</legend>
+                            <div class="form-group">
+                                <label for="user" class="col-sm-2 control-label">Usuário</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="user" name="user" placeholder="Usuário">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">Senha</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" id="pass" placeholder="Senha">
+                            <div class="form-group">
+                                <label for="pass" class="col-sm-2 control-label">Senha</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" name="pass" id="pass" placeholder="Senha">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-default">Entrar</button>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-default">Entrar</button>
+                                </div>
                             </div>
                         </div>
                     </fieldset>
