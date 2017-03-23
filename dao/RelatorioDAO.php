@@ -57,6 +57,7 @@ class RelatorioDAO {
                 $ordem->setHora_inicio_ordem($ln['hora_inicio_ordem']);
                 $ordem->setHora_fim_ordem($ln['hora_fim_ordem']);
                 $ordem->setDesc_resolve_ordem($ln['desc_resolve_ordem']);
+                $ordem->setData_fim_ordem($ln['data_fim_ordem']);
 
                 $ordens[] = $ordem;
             }

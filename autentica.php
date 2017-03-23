@@ -20,10 +20,9 @@ $senha = filter_input(INPUT_POST, "pass");
 $usuario = $usuarioControle->buscaAutentica($login, $senha);
 
 if ($usuario->getNome_usuario() != null) {
-    echo $usuario->getNome_usuario();
-    echo $usuario->getCidade_usuario();
     $_SESSION["login"] = $usuario->getNome_usuario();
     $_SESSION["cidade"] = $usuario->getCidade_usuario();
+    $_SESSION["id_user"] = $usuario->getCod_usuario();
     
     $extra = 'controle.php';
     header("Location: http://$host$uri/$extra");

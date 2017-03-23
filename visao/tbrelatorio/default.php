@@ -2,8 +2,9 @@
     <thead>
         <tr>
             <th class="col-lg-3">Cliente</th>
-            <th class="col-lg-2">Tipo de O.S.</th>
-            <th class="col-lg-2">Tempo Gastro</th>
+            <th class="col-lg-1 text-right">Data</th>
+            <th class="col-lg-1">Baixa</th>
+            <th class="col-lg-2 text-center">Tipo de O.S.</th>
             <th class="col-lg-5">Detalhes</th>
         </tr>
     </thead>
@@ -34,8 +35,6 @@
 
         if (!empty(filter_input(INPUT_POST, "cidade_cliente"))) {
             $cidade_cliente = filter_input(INPUT_POST, "cidade_cliente");
-        } else {
-            $cidade_cliente = $login = $_SESSION["cidade"];
         }
 
         foreach ($daoRelatorio->lista($inicio, $fim, $nome_cliente, $cidade_cliente) as $ordem) {
@@ -46,16 +45,19 @@
                     echo $cliente->getNome_cliente();
                     ?>
                 </td>
-                <td><?php
+                <td class="text-right"><?= date('d/m/Y', strtotime($ordem->getData_cad_ordem())) ?></td>
+                <td class=""><?php
+                    //$horaInicio = (date("G", strtotime($ordem->getHora_inicio_ordem())) * 60) + date("i", strtotime($ordem->getHora_inicio_ordem()));
+                    //$horaFim = (date("G", strtotime($ordem->getHora_fim_ordem())) * 60) + date("i", strtotime($ordem->getHora_fim_ordem()));
+                    //echo $horaFim - $horaInicio . " Min";
+                    echo date('d/m/Y', strtotime($ordem->getData_fim_ordem()));
+                    ?>
+                </td>
+                <td class="text-center"><?php
                     $tipo = $ordem->getCod_tipo_ordem();
                     echo $tipo->getDesc_tipo();
                     ?>
                 </td>
-                <td><?php
-                    $horaInicio = (date("G", strtotime($ordem->getHora_inicio_ordem())) * 60) + date("i", strtotime($ordem->getHora_inicio_ordem()));
-                    $horaFim = (date("G", strtotime($ordem->getHora_fim_ordem())) * 60) + date("i", strtotime($ordem->getHora_fim_ordem()));
-                    echo $horaFim - $horaInicio . " MINUTOS";
-                    ?></td>
                 <td><?= $ordem->getDesc_resolve_ordem() ?></td>
             </tr>
         <?php } ?>

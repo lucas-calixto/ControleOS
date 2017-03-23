@@ -19,7 +19,7 @@ $daoCliente = new ClienteDAO();
 $cliente = $daoCliente->busca(filter_input(INPUT_POST, "cod_cliente"));
 
 if (!strcmp(filter_input(INPUT_GET, "metodo"), "gravar")) {
-    $ordem->setCod_atendente_ordem(1);
+    $ordem->setCod_atendente_ordem($_SESSION['id_user']);
     $ordem->setCod_cliente_ordem(filter_input(INPUT_POST, "cod_cliente"));
     $ordem->setCod_tipo_ordem(filter_input(INPUT_POST, "cod_tipo"));
     $ordem->setDesc_ordem(filter_input(INPUT_POST, "desc_ordem"));

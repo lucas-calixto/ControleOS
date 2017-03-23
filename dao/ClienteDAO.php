@@ -17,7 +17,7 @@ class ClienteDAO {
 
     public function lista() {
         try {
-            $sql = "SELECT cod_cliente, nome_cliente, cod_pers_cliente FROM clientes";
+            $sql = "SELECT cod_cliente, nome_cliente, cod_pers_cliente FROM clientes ORDER BY cod_pers_cliente ASC";
 
             $clientes = [];
 

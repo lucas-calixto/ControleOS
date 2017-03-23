@@ -20,7 +20,7 @@ if ($login ==  null) {
         <title>Controle de O.S.</title>
 
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href="https://bootswatch.com/flatly/bootstrap.css" rel="stylesheet">
         <link href="css/estilo.css" rel="stylesheet">
         <link href="css/jquery-editable-select.min.css" rel="stylesheet">
         <link href="css/jquery-ui-1.10.0.custom.css" rel="stylesheet">
@@ -119,7 +119,7 @@ if ($login ==  null) {
         <div class="container">
             <footer class="col-lg-12">
                 <ul class="breadcrumb">
-                    <li  class="active">&copy; Direitos Reservados a Tec Port Informatica, Porteirinha MG - <b>v 1.0-Beta</b></li>
+                    <li  class="active">&copy; Direitos Reservados a Tec Port Informatica, Porteirinha MG - <b>v 1.0_Beta-Rev-1</b></li>
                 </ul>
             </footer>
         </div>

@@ -5,7 +5,7 @@ require_once BASE_DIR . 'modelo' . DS . 'Tipo.php';
 require_once BASE_DIR . 'modelo' . DS . 'Ordem.php';
 require_once BASE_DIR . 'modelo' . DS . 'Tecnico.php';
 require_once BASE_DIR . 'modelo' . DS . 'Cliente.php';
-require_once BASE_DIR . 'modelo' . DS . 'Atendente.php';
+require_once BASE_DIR . 'modelo' . DS . 'Usuario.php';
 
 class ControleOS_DAO {
 
@@ -114,7 +114,7 @@ class ControleOS_DAO {
         try {
             $sql = "SELECT * FROM ordens"
                     . " INNER JOIN clientes ON ordens.cod_cliente_ordem = clientes.cod_cliente"
-                    . " INNER JOIN atendentes ON ordens.cod_atendente_ordem = atendentes.cod_atendente"
+                    . " INNER JOIN usuarios ON ordens.cod_atendente_ordem = usuarios.cod_usuario"
                     . " INNER JOIN tecnicos ON ordens.cod_tecnico_ordem = tecnicos.cod_tecnico"
                     . " INNER JOIN tipos ON ordens.cod_tipo_ordem = tipos.cod_tipo"
                     . " WHERE cod_ondem = :cod";
@@ -129,7 +129,7 @@ class ControleOS_DAO {
             $ordem = new Ordem();
             $tecnico = new Tecnico();
             $cliente = new Cliente();
-            $atendente = new Atendente();
+            $usuario = new Usuario();
 
             $ordem->setCod_ordem($retorno['cod_ondem']);
 
@@ -143,8 +143,8 @@ class ControleOS_DAO {
             $cliente->setPlano_cliente($retorno['plano_cliente']);
             $ordem->setCod_cliente_ordem($cliente);
 
-            $atendente->setNome_atendente($retorno['nome_atentente']);
-            $ordem->setCod_atendente_ordem($atendente);
+            $usuario->setNome_usuario($retorno['nome_usuario']);
+            $ordem->setCod_atendente_ordem($usuario);
 
             $tecnico->setNome_tecnico($retorno['nome_tecnico']);
             $ordem->setCod_tecnico_ordem($tecnico);

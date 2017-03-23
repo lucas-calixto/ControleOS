@@ -70,7 +70,7 @@ and open the template in the editor.
                 <td class="tg-yw4l"><?= $cliente->getTelefone_um_cliente() ?></td>
             </tr>
             <tr>
-                <td class="tg-9hbo" colspan="5">DATA / HORA INICIO: ______/_____/______   _____:_____  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DATA / HORA INICIO: ______/_____/______    _____:_____</td>
+                <td class="tg-9hbo" colspan="5">DATA / HORA INICIO: ______/_____/______   _____:_____  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DATA / HORA FIM: ______/_____/______    _____:_____</td>
             </tr>
             <tr>
                 <td class="tg-9hbo">ENDEREÇO:</td>
@@ -138,20 +138,21 @@ and open the template in the editor.
         <br />
         <br />
 
+        
         <table class="tg" style="table-layout: fixed; width: 834px">
             <colgroup>
                 <col style="width: 122px">
                 <col style="width: 275px">
                 <col style="width: 46px">
-                <col style="width: 266px">
-                <col style="width: 125px">
+                <col style="width: 256px">
+                <col style="width: 135px">
             </colgroup>
             <tr>
                 <th class="tg-e3zv">CLIENTE:</th>
                 <th class="tg-yw4l text-capitalize"><?= $cliente->getNome_cliente() ?></th>
                 <th class="tg-yw4l"></th>
                 <th class="tg-l2oz">DATA SOLICITAÇÃO:</th>
-                <th class="tg-d55q"><?= date('d/m/Y', strtotime($ordem->getData_cad_ordem())) ?></th>
+                <th class="tg-d55q"><?= date('d/m/Y', strtotime($ordem->getData_cad_ordem())) . ' - ' . date('H:i', strtotime($ordem->getHora_cad_ordem())) ?></th>
             </tr>
             <tr>
                 <td class="tg-9hbo">SOLICITANTE:</td>
@@ -161,15 +162,18 @@ and open the template in the editor.
                 <td class="tg-yw4l"><?= $cliente->getTelefone_um_cliente() ?></td>
             </tr>
             <tr>
-                <td class="tg-9hbo" colspan="5">DATA / HORA INICIO: ______/_____/______   _____:_____  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DATA / HORA INICIO: ______/_____/______    _____:_____</td>
+                <td class="tg-9hbo" colspan="5">DATA / HORA INICIO: ______/_____/______   _____:_____  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DATA / HORA FIM: ______/_____/______    _____:_____</td>
             </tr>
             <tr>
                 <td class="tg-9hbo">ENDEREÇO:</td>
                 <td class="tg-yw4l" colspan="4"><?= $cliente->getEndereco_cliente() ?></td>
             </tr>
             <tr>
-                <td class="tg-9hbo">ATENDENTE:</td>
-                <td class="tg-yw4l"><?= $ordem->getCod_atendente_ordem()->getNome_atendente() ?></td>
+                <td class="tg-9hbo">INFORMAÇÕES:</td>
+                <td class="tg-yw4l">
+                    <?= "IP: " . $cliente->getIp_cliente() . " - " ?>
+                    <?= "PLANO: " . $cliente->getPlano_cliente() ?>
+                </td>
                 <td class="tg-yw4l"></td>
                 <td class="tg-l2oz">TÉCNICO:</td>
                 <td class="tg-yw4l"><?= $ordem->getCod_tecnico_ordem()->getNome_tecnico() ?></td>
@@ -220,6 +224,7 @@ and open the template in the editor.
                 <td class="tg-yw4l"></td>
                 <td class="tg-yw4l"></td>
             </tr>
+        </table>
 
     </body>
 </html>

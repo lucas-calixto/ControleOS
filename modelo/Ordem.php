@@ -3,7 +3,7 @@
 include_once BASE_DIR . 'modelo' . DS . 'Tipo.php';
 include_once BASE_DIR . 'modelo' . DS . 'Cliente.php';
 include_once BASE_DIR . 'modelo' . DS . 'Tecnico.php';
-include_once BASE_DIR . 'modelo' . DS . 'Atendente.php';
+include_once BASE_DIR . 'modelo' . DS . 'Usuario.php';
 
 class Ordem {
 
@@ -28,7 +28,7 @@ class Ordem {
         $this->cod_tipo_ordem = new Tipo();
         $this->cod_cliente_ordem = new Cliente();
         $this->cod_tecnico_ordem = new Tecnico();
-        $this->cod_atendente_ordem = new Atendente();
+        $this->cod_atendente_ordem = new Usuario();
     }
 
     function getCod_ordem() {

@@ -50,7 +50,7 @@ $clienteDAO = new ClienteDAO();
     <article class="col-lg-12">
         <div class="panel panel-default">
             <!-- Default panel contents -->
-            <div class="panel-heading"><h5>EFICIÊNCIA</h5></div>
+            <div class="panel-heading"><h5>RELATÓRIOS</h5></div>
             <div class="panel-body">
                 <div class="row">
                     <article class="col-lg-4">
@@ -94,7 +94,7 @@ $clienteDAO = new ClienteDAO();
             ?>
         </div>
         <?php if (isset($tpm)) { ?>
-            <div class="alert alert-success" role="alert">O tempo médio gasto pelo técnico foi de: <b> <?= $tpm ?> </b> MINUTOS</div>
+            <div class="alert alert-success" role="alert">O tempo médio gasto pelo técnico foi de: <b> <?= $tpm ?> </b> MINUTOS, <b><?= $cont ?></b> em Ordens de Serviços.</div>
         <?php } ?>
         <?php if (isset($qtd_pag)) { ?>
             <div class="btn-group col-lg-">
@@ -137,7 +137,7 @@ $clienteDAO = new ClienteDAO();
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="tecnico">Tecnico</label>
                         <div class="col-md-8">
-                            <select id="tecnico" name="tecnico" class="form-control" multiple="multiple">
+                            <select id="tecnico" name="tecnico" class="form-control">
                                 <?php foreach ($tecnicoControle->lista(0, 100) as $ln) { ?>
                                     <option value="<?= $ln->getCod_tecnico() ?>"><?= $ln->getNome_tecnico() ?></option>
                                 <?php } ?>
@@ -185,7 +185,7 @@ $clienteDAO = new ClienteDAO();
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="tecnico">Tecnico</label>
                         <div class="col-md-8">
-                            <select id="tecnico" name="tecnico" class="form-control" multiple="multiple">
+                            <select id="tecnico" name="tecnico" class="form-control">
                                 <?php foreach ($tecnicoControle->lista(0, 100) as $ln) { ?>
                                     <option value="<?= $ln->getCod_tecnico() ?>"><?= $ln->getNome_tecnico() ?></option>
                                 <?php } ?>
