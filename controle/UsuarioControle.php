@@ -1,6 +1,6 @@
 <?php
 
-require_once './dao/UsuarioDAO.php';
+require_once BASE_DIR . 'dao' . DS . 'UsuarioDAO.php';
 
 class UsuarioControle {
 

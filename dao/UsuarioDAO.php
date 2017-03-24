@@ -1,7 +1,7 @@
 <?php
 
-require_once './banco/Banco.php';
-require_once './modelo/Usuario.php';
+require_once BASE_DIR . 'banco' . DS . 'Banco.php';
+require_once BASE_DIR . 'modelo' . DS . 'Usuario.php';
 
 class UsuarioDAO {
 
@@ -106,7 +106,7 @@ class UsuarioDAO {
     public function buscaAutentica($login, $senha) {
         try {
             $sql = "SELECT cod_usuario, nome_usuario, login_usuario, cidade_usuario FROM usuarios"
-                    . " WHERE nome_usuario LIKE :login AND senha_usuario LIKE :senha";
+                    . " WHERE login_usuario LIKE :login AND senha_usuario LIKE :senha";
 
             $parametros = array(
                 ":login" => $login,
