@@ -119,7 +119,7 @@ if ($login ==  null) {
         <div class="container">
             <footer class="col-lg-12">
                 <ul class="breadcrumb">
-                    <li  class="active">&copy; Direitos Reservados a Tec Port Informatica, Porteirinha MG - <b>v 1.0_Beta-Rev-1</b></li>
+                    <li  class="active">&copy; Direitos Reservados a Tec Port Informatica, Porteirinha MG - <b>v 1.0_Beta-Rev-2</b></li>
                 </ul>
             </footer>
         </div>
