@@ -91,8 +91,8 @@ and open the template in the editor.
                         <?= "PLANO: " . $cliente->getPlano_cliente() ?>
                     </td>
                     <td class="tg-yw4l"></td>
-                    <td class="tg-l2oz">TÉCNICO:</td>
-                    <td class="tg-yw45"><?= $ordem->getCod_tecnico_ordem()->getNome_tecnico() ?></td>
+                    <td class="tg-l2oz">ATENDENTE:</td>
+                    <td class="tg-yw45"><?= $ordem->getCod_atendente_ordem()->getNome_usuario() ?></td>
                 </tr>
                 <tr>
                     <td class="tg-9hbo">TIPO DE O.S.</td>

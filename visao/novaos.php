@@ -23,7 +23,7 @@ if (!strcmp(filter_input(INPUT_GET, "metodo"), "gravar")) {
     $ordem->setCod_cliente_ordem(filter_input(INPUT_POST, "cod_cliente"));
     $ordem->setCod_tipo_ordem(filter_input(INPUT_POST, "cod_tipo"));
     $ordem->setDesc_ordem(filter_input(INPUT_POST, "desc_ordem"));
-    $ordem->setCod_tecnico_ordem(filter_input(INPUT_POST, "cod_tecnico"));
+    $ordem->setCod_tecnico_ordem(null);
     $ordem->setDesc_total_ordem(filter_input(INPUT_POST, "desc_total"));
     $ordem->setSolicitatante_ordem(filter_input(INPUT_POST, "solicita_ordem"));
     $ordem->setStatus_ordem("ABERTA");
@@ -69,19 +69,6 @@ if (!strcmp(filter_input(INPUT_GET, "metodo"), "gravar")) {
                     <div class="col-md-9">
                         <input id="desc_ordem" name="desc_ordem" type="text" placeholder="Descrição" class="form-control input-md" required="">
                         <span class="help-block">Descrição resumida do problema</span>  
-                    </div>
-                </div>
-
-                <!-- Select Multiple -->
-                <div class="form-group">
-                    <label class="col-md-3 control-label" for="cod_tecnico">Selecione o Técnico</label>
-                    <div class="col-md-9">
-                        <select id="cod_tecnico" name="cod_tecnico" class="form-control" multiple="multiple" required="">
-                            <?php foreach ($daoTecnico->lista(0, 100) as $tecnico) { ?>
-                                <option value="<?= $tecnico->getCod_tecnico() ?>"><?= $tecnico->getNome_tecnico() ?></option>
-                            <?php } ?>
-                        </select>
-                        <span class="help-block">Tecnico responsável</span>  
                     </div>
                 </div>
 

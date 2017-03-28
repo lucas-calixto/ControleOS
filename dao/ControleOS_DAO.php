@@ -115,7 +115,6 @@ class ControleOS_DAO {
             $sql = "SELECT * FROM ordens"
                     . " INNER JOIN clientes ON ordens.cod_cliente_ordem = clientes.cod_cliente"
                     . " INNER JOIN usuarios ON ordens.cod_atendente_ordem = usuarios.cod_usuario"
-                    . " INNER JOIN tecnicos ON ordens.cod_tecnico_ordem = tecnicos.cod_tecnico"
                     . " INNER JOIN tipos ON ordens.cod_tipo_ordem = tipos.cod_tipo"
                     . " WHERE cod_ondem = :cod";
 
@@ -127,7 +126,6 @@ class ControleOS_DAO {
 
             $tipo = new Tipo();
             $ordem = new Ordem();
-            $tecnico = new Tecnico();
             $cliente = new Cliente();
             $usuario = new Usuario();
 
@@ -146,9 +144,6 @@ class ControleOS_DAO {
 
             $usuario->setNome_usuario($retorno['nome_usuario']);
             $ordem->setCod_atendente_ordem($usuario);
-
-            $tecnico->setNome_tecnico($retorno['nome_tecnico']);
-            $ordem->setCod_tecnico_ordem($tecnico);
 
             $tipo->setDesc_tipo($retorno['desc_tipo']);
             $ordem->setCod_tipo_ordem($tipo);
@@ -185,7 +180,7 @@ class ControleOS_DAO {
             function baixar(Ordem $ordem) {
         try {
             $sql = "UPDATE ordens"
-                    . " SET status_ordem = 'BAIXADA', desc_resolve_ordem = :desc_resolve, data_inicio_ordem = :data_inicio, data_fim_ordem = :data_fim, hora_inicio_ordem = :hora_inicio, hora_fim_ordem = :hora_fim"
+                    . " SET status_ordem = 'BAIXADA', desc_resolve_ordem = :desc_resolve, data_inicio_ordem = :data_inicio, data_fim_ordem = :data_fim, hora_inicio_ordem = :hora_inicio, hora_fim_ordem = :hora_fim, cod_tecnico_ordem = :cod_tecnico"
                     . " WHERE cod_ondem = :cod";
 
             $parametros = array(
@@ -194,7 +189,8 @@ class ControleOS_DAO {
                 ":data_fim" => $ordem->getData_fim_ordem(),
                 ":hora_inicio" => $ordem->getHora_inicio_ordem(),
                 ":hora_fim" => $ordem->getHora_fim_ordem(),
-                ":desc_resolve" => $ordem->getDesc_resolve_ordem()
+                ":desc_resolve" => $ordem->getDesc_resolve_ordem(),
+                ":cod_tecnico" => $ordem->getCod_tecnico_ordem()
             );
 
             return $this->banco->ExecuteNonQuery($sql, $parametros);

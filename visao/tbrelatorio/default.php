@@ -11,7 +11,7 @@
     <tbody>
         <?php
         $qtd = count($daoRelatorio->lista(0, 1000));
-        $qtd_reg = 10;
+        $qtd_reg = 15;
         $qtd_pag = ceil($qtd / $qtd_reg);
         $pag_atual = filter_input(INPUT_GET, 'pag');
 

@@ -38,6 +38,7 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
 
     $ordem->setCod_ordem(filter_input(INPUT_POST, "cod_ordem_baixar"));
     $ordem->setDesc_resolve_ordem(filter_input(INPUT_POST, "desc_resolve_ordem"));
+    $ordem->setCod_tecnico_ordem(filter_input(INPUT_POST, "cod_tecnico"));
 
     $ordem->setData_inicio_ordem(date('Y-m-d', strtotime(filter_input(INPUT_POST, 'data_inicio'))));
     $ordem->setData_fim_ordem(date('Y-m-d', strtotime(filter_input(INPUT_POST, 'data_fim'))));
@@ -135,7 +136,7 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
             <tbody>
                 <?php
                 $qtd = count($controle->lista(0, 1000));
-                $qtd_reg = 10;
+                $qtd_reg = 15;
                 $qtd_pag = ceil($qtd / $qtd_reg);
                 $pag_atual = filter_input(INPUT_GET, 'pag');
 
@@ -215,7 +216,7 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
                             <select class="form-control" name="cod_cliente" id="combobox" required="">
                                 <option value="">Selecione</option>
                                 <?php foreach ($dao->lista() as $cliente) { ?>
-                                <option value="<?= $cliente->getCod_cliente() ?>"><?= $cliente->getCod_pers_cliente() ?> - <?= $cliente->getNome_cliente() ?></option>
+                                    <option value="<?= $cliente->getCod_cliente() ?>"><?= $cliente->getCod_pers_cliente() ?> - <?= $cliente->getNome_cliente() ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -290,6 +291,13 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "editar")) {
                         <span class="help-block">Data e hora de inicio.</span>  
                         <input type="datetime-local" class="form-control" name="data_fim" />
                         <span class="help-block">Data e hora fim.</span>  
+                        <!-- Select Multiple -->
+                        <select id="cod_tecnico" name="cod_tecnico" class="form-control" required="">
+                            <?php foreach ($daoTecnico->lista(0, 100) as $tecnico) { ?>
+                                <option value="<?= $tecnico->getCod_tecnico() ?>"><?= $tecnico->getNome_tecnico() ?></option>
+                            <?php } ?>
+                        </select>
+                        <span class="help-block">Tecnico responsável</span>
                         <br />
                         <input type="hidden" value="" name="cod_ordem_baixar" id="cod_ordem_baixar" />
                         <input type="submit" value="Gravar" class="btn btn-success btn-sm btn-block"  onclick="return confirm('Deseja baixar esta Ordem de Serviço?')" />
