@@ -40,7 +40,7 @@ $clienteDAO = new ClienteDAO();
             <div class="panel panel-warning">
                 <div class="panel-heading">TEMPO MÉDIO POR O.S.</div>
                 <div class="panel-body txt-panel-dash">
-                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span> <?= $daoRelatorio->getTempoMedioOSMes() ?> Minutos
+                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span> <?= floor($daoRelatorio->getTempoMedioOSMes()) ?> Minutos
                 </div>
             </div>
         </div>

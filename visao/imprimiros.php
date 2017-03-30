@@ -33,9 +33,9 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title></title>
-        <link rel="icon" type="image/png" sizes="32x32" href="../imagens/favicon-32x32.png">
     </head>
     <body onload="self.print();">
+        <link rel="icon" type="image/png" sizes="32x32" href="../imagens/favicon-32x32.png" />
         <style type="text/css">
             .tg  {border-collapse:collapse;border-spacing:0;}
             .tg td{font-family:Arial, sans-serif;font-size:14px;padding:5px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}

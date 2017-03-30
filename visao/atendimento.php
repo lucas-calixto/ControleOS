@@ -82,9 +82,9 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "gravar")) {
                 <tr>
                     <th class="col-lg-1">Codigo</th>
                     <th class="col-lg-3">Cliente</th>
-                    <th class="col-lg-3">Descrição</th>
+                    <th class="col-lg-4">Descrição</th>
                     <th class="col-lg-2">Data de Cadastro</th>
-                    <th class="col-lg-2">Tipo</th>
+                    <th class="col-lg-1">Telefone</th>
                     <th class="col-lg-1 text-center">Ações</th>
                 </tr>
             </thead>
@@ -129,7 +129,7 @@ if (!strcmp(filter_input(INPUT_GET, "acao"), "gravar")) {
                             ?></td>
                         <td><?= $ordem->getDesc_ordem() ?></td>
                         <td><?= date('d/m/Y', strtotime($ordem->getData_cad_ordem())) . ' - ' . date('H:i', strtotime($ordem->getHora_cad_ordem())) ?></td>
-                        <td><?= $ordem->getCod_tipo_ordem()->getDesc_tipo() ?></td>
+                        <td><?= $ordem->getCod_cliente_ordem()->getTelefone_um_cliente() ?></td>
                         <td class="text-center">
                             <a href="" title="Ligar" data-toggle="modal" data-target="#atendimentoOrdem" onclick="preencheBaixar(<?= $ordem->getCod_ordem() ?>)"><span class="glyphicon glyphicon-ok blue" aria-hidden="true"></span></a>
                         </td>

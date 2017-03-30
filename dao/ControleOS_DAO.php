@@ -53,7 +53,7 @@ class ControleOS_DAO {
                     . " AND (clientes.nome_cliente LIKE '%" . $nome_cliente . "%'"
                     . " AND clientes.cod_cidade_cliente LIKE '%" . $cidade_cliente . "%'"
                     . " AND ordens.cod_tipo_ordem LIKE '%" . $tipo_os . "%')"
-                    . " ORDER BY hora_cad_ordem, data_cad_ordem DESC"
+                    . " ORDER BY data_cad_ordem, hora_cad_ordem ASC"
                     . " LIMIT :inicio, :fim";
 
             $parametros = array(

@@ -75,6 +75,7 @@ class AtendimentoDAO {
 
                 $ordem->setCod_ordem($ln['cod_ondem']);
                 $cliente->setNome_cliente($ln['nome_cliente']);
+                $cliente->setTelefone_um_cliente($ln['telefone_um_cliente']);
                 $ordem->setCod_cliente_ordem($cliente);
                 $ordem->setDesc_ordem($ln['desc_ordem']);
                 $ordem->setData_cad_ordem($ln['data_cad_ordem']);
