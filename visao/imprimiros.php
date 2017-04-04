@@ -16,12 +16,15 @@ require_once BASE_DIR . 'modelo' . DS . 'Cliente.php';
 require_once BASE_DIR . 'controle' . DS . 'TecnicoControle.php';
 require_once BASE_DIR . 'modelo' . DS . 'Tecnico.php';
 
+require_once BASE_DIR . 'modelo' . DS . 'Cidade.php';
+
 $ordemControle = new OrdemControle();
 $daoTecnico = new TecnicoControle();
 $daoTipo = new TipoControle();
 
 $ordem = $ordemControle->busca(filter_input(INPUT_GET, 'cod_ordem'));
 $cliente = $ordem->getCod_cliente_ordem();
+$cidade = $cliente->getCod_cidade_cliente();
 ?>
 <!DOCTYPE html>
 <!--
@@ -65,7 +68,7 @@ and open the template in the editor.
                 </colgroup>
                 <tr>
                     <th class="tg-e3zv">CLIENTE:</th>
-                    <th class="tg-yw4l text-capitalize"><?= $cliente->getNome_cliente() ?></th>
+                    <th class="tg-yw4l text-capitalize"><?= $cliente->getCod_pers_cliente() ?> - <?= $cliente->getNome_cliente() ?></th>
                     <th class="tg-yw4l"></th>
                     <th class="tg-l2oz">DATA SOLICITAÇÃO:</th>
                     <th class="tg-d55q"><?= date('d/m/Y', strtotime($ordem->getData_cad_ordem())) . ' - ' . date('H:i', strtotime($ordem->getHora_cad_ordem())) ?></th>
@@ -82,13 +85,13 @@ and open the template in the editor.
                 </tr>
                 <tr>
                     <td class="tg-9hbo">ENDEREÇO:</td>
-                    <td class="tg-yw4l" colspan="4"><?= $cliente->getEndereco_cliente() ?> - <?= $cliente->getBairro_cliente() ?></td>
+                    <td class="tg-yw4l" colspan="4"><?= $cliente->getEndereco_cliente() ?> - <?= $cliente->getBairro_cliente() ?> - <?= $cidade->getDesc_cidade() ?></td>
                 </tr>
                 <tr>
                     <td class="tg-9hbo">INFORMAÇÕES:</td>
                     <td class="tg-yw4l">
                         <?= "IP: " . $cliente->getIp_cliente() . " - " ?>
-                        <?= "PLANO: " . $cliente->getPlano_cliente() ?>
+                        <b><?= "PPPoE: " . $cliente->getUser_pppoe_cliente()  ?></b>
                     </td>
                     <td class="tg-yw4l"></td>
                     <td class="tg-l2oz">ATENDENTE:</td>

@@ -60,6 +60,7 @@ if ($login ==  null) {
                                     <!--<li><a href="?pg=atendente">Cadastro de Atendentes</a></li>-->
                                     <li><a href="?pg=tecnico"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Cadastro de Tecnicos</a></li>
                                     <li><a href="?pg=tipo"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Cadastro de Tipos</a></li>
+                                    <li><a href="?pg=cliente"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Atualiza PPPoE</a></li>
                                 </ul>
                             </li>
                             <li><a href="?pg=controleos">Controle</a></li>
@@ -110,6 +111,9 @@ if ($login ==  null) {
             case "relatorios":
                 require_once './visao/relatorios.php';
                 break;
+            case "cliente":
+                require_once './visao/cliente.php';
+                break;
             default:
                 require_once './visao/controleos.php';
         }
@@ -119,7 +123,7 @@ if ($login ==  null) {
         <div class="container">
             <footer class="col-lg-12">
                 <ul class="breadcrumb">
-                    <li  class="active">&copy; Direitos Reservados a Tec Port Informatica, Porteirinha MG - <b>v 1.0_Beta-Rev-4</b></li>
+                    <li  class="active">&copy; Direitos Reservados a Tec Port Informatica, Porteirinha MG - <b>v 1.0_Beta-Rev-5</b></li>
                 </ul>
             </footer>
         </div>

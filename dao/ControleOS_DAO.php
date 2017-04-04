@@ -116,6 +116,7 @@ class ControleOS_DAO {
                     . " INNER JOIN clientes ON ordens.cod_cliente_ordem = clientes.cod_cliente"
                     . " INNER JOIN usuarios ON ordens.cod_atendente_ordem = usuarios.cod_usuario"
                     . " INNER JOIN tipos ON ordens.cod_tipo_ordem = tipos.cod_tipo"
+                    . " INNER JOIN cidades ON clientes.cod_cidade_cliente = cidades.cod_cidade"
                     . " WHERE cod_ondem = :cod";
 
             $parametros = array(
@@ -130,8 +131,12 @@ class ControleOS_DAO {
             $usuario = new Usuario();
 
             $ordem->setCod_ordem($retorno['cod_ondem']);
+            
+            $cidade = new Cidade();
+            $cidade->setDesc_cidade($retorno['desc_cidade']);
 
             $cliente->setCod_cliente($retorno['cod_cliente']);
+            $cliente->setCod_pers_cliente($retorno['cod_pers_cliente']);
             $cliente->setNome_cliente($retorno['nome_cliente']);
             $cliente->setTelefone_um_cliente($retorno['telefone_um_cliente']);
             $cliente->setEndereco_cliente($retorno['endereco_cliente']);
@@ -140,6 +145,7 @@ class ControleOS_DAO {
             $cliente->setUser_pppoe_cliente($retorno['user_pppoe_cliente']);
             $cliente->setPass_pppoe_cliente($retorno['pass_pppoe_cliente']);
             $cliente->setPlano_cliente($retorno['plano_cliente']);
+            $cliente->setCod_cidade_cliente($cidade);
             $ordem->setCod_cliente_ordem($cliente);
 
             $usuario->setNome_usuario($retorno['nome_usuario']);

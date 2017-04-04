@@ -225,7 +225,7 @@ class RelatorioDAO {
 
                 $tipo = $ln['desc_tipo'];
 
-                if (!strcmp($data, $mes) and ! strcmp($tipo, 'ATIVAÇÃO')) {
+                if (!strcmp($data, $mes) and ! strcmp($tipo, 'ATIVACAO')) {
                     $cont++;
                 }
             }

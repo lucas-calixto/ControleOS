@@ -78,4 +78,22 @@ class ClienteDAO {
             echo $ex->getMessage();
         }
     }
+    
+    public function updateCliente(Cliente $cliente) {
+        
+        try {
+            $sql = "UPDATE clientes SET user_pppoe_cliente = :user, pass_pppoe_cliente = :pass WHERE cod_cliente = :cod";
+            
+            $parametros = array(
+                ":user" => $cliente->getUser_pppoe_cliente(),
+                ":pass" => $cliente->getPass_pppoe_cliente(),
+                ":cod" => $cliente->getCod_cliente()
+            );
+
+            return $this->banco->ExecuteNonQuery($sql, $parametros);
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+        }
+        
+    }
 }

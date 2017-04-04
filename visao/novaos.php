@@ -67,7 +67,7 @@ if (!strcmp(filter_input(INPUT_GET, "metodo"), "gravar")) {
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="desc_ordem">Descrição do Serviço</label>  
                     <div class="col-md-9">
-                        <input id="desc_ordem" name="desc_ordem" type="text" placeholder="Descrição" class="form-control input-md" required="">
+                        <input id="desc_ordem" name="desc_ordem" type="text" placeholder="Descrição" class="form-control input-md">
                         <span class="help-block">Descrição resumida do problema</span>  
                     </div>
                 </div>
